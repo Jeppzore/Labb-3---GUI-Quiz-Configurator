@@ -3,15 +3,123 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views"
+             xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views" 
+             xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConfigurationViewModel}"
+             DataContext="{Binding ConfigurationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
     <!--Innehåller de komponenter man ser i 
     konfigurationsläget (View -> Edit)-->
     
-    
     <Grid>
-            
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="txtBlockQuestionPack" Margin="10,28,0,0">
+    <Bold>Default Question Pack</Bold>
+        </TextBlock>
+
+        <Grid Grid.Column="0" Height="15" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0" >
+            <Button x:Name="buttonPackOptions"
+        Content="¤"
+        Width="15"
+        Height="15"
+        HorizontalAlignment="Left"
+        Grid.Column="0"
+        Margin="8,0,3,0"
+        ToolTip="Pack Options"/>
+
+            <Button x:Name="buttonAddQuestion"
+        Content="+"
+        Width="15"
+        Height="15"
+        HorizontalAlignment="Center"
+        Grid.Column="0"
+        Margin="8,0,3,0"
+        ToolTip="Add Question"/>
+
+            <Button x:Name="buttonRemoveQuestion"
+        Content="-"
+        Width="15"
+        Height="15"
+        HorizontalAlignment="Right"
+        Grid.Column="0"
+        Margin="8,0,3,0"
+        ToolTip="Remove Question"/>
+        </Grid>
+
+
+        <ListBox x:Name="myListbox"
+         Grid.Column="0"
+         Margin="10,45,0,12"
+         Visibility="Visible"
+         HorizontalAlignment="Left"
+         Width="380"
+         SelectionMode="Extended">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="contextAdd"
+                      Header="Add Question"/>
+
+                    <MenuItem x:Name="contextRemove"
+                      Header="Remove Question"
+                      IsEnabled="False"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+
+        <StackPanel x:Name="stackpanelLeft" 
+            Grid.Column="0"
+            Margin="15,40,10,10">
+        </StackPanel>
+
+        <StackPanel x:Name="stackpanelRight" Grid.Column="1" Margin="20,35,10,12">
+            <TextBlock Margin="6">
+        <Bold>
+            Question:
+        </Bold>
+            </TextBlock>
+
+            <TextBox x:Name="textboxQuestion" Margin="7,0,17,0" Height="100" MaxHeight="100" TextWrapping="Wrap"/>
+
+            <TextBlock Margin="7,40,17,0">
+        <Bold>
+            Correct Answer:
+        </Bold>
+            </TextBlock>
+
+            <TextBox x:Name="textboxCorrectAnswer" Margin="7,3,17,0"/>
+
+            <TextBlock Margin="7,10,17,0">
+        <Bold>
+            First Incorrect Answer:
+        </Bold>
+            </TextBlock>
+
+            <TextBox x:Name="textboxFirstIncorrectAnswer" Margin="7,3,17,0"/>
+
+            <TextBlock Margin="7,10,17,0">
+        <Bold>
+            Second Incorrect Answer:
+        </Bold>
+            </TextBlock>
+
+            <TextBox x:Name="textboxSecondIncorrectAnswer" Margin="7,3,17,0"/>
+
+            <TextBlock Margin="7,10,17,0">
+        <Bold>
+            Third Incorrect Answer:
+        </Bold>
+            </TextBlock>
+
+            <TextBox x:Name="textboxThirdIncorrectAnswer" Margin="7,3,17,0"/>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

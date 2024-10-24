@@ -1,13 +1,6 @@
-﻿using System.Text;
+﻿using Labb_3___GUI_Quiz.Model;
+using Labb_3___GUI_Quiz.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Labb_3___GUI_Quiz
 {
@@ -19,19 +12,10 @@ namespace Labb_3___GUI_Quiz
         public MainWindow()
         {
             InitializeComponent();
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nhello");
-            myListbox.Items.Add("Question1 \nsnopp");
 
+            var pack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
 
+            pack.TimeLimitInSeconds = 5;
 
         }
     }

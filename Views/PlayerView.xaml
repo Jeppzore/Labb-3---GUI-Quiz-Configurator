@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views"
+             xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views" 
+             xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:PlayerViewModel}"
+             DataContext="{Binding PlayerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -12,6 +15,12 @@
     
     
     <Grid>
-            
+        <Button Grid.Row="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="{Binding TestData}"
+                Margin="10"
+                Command="{Binding UpdateButtonCommand}"
+                />
     </Grid>
 </UserControl>
