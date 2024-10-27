@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Labb_3___GUI_Quiz.Dialogs;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Labb_3___GUI_Quiz.ViewModel
@@ -38,15 +39,22 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         // Methods to show the correct view
 
-        public void ShowPlayerView()
+        public void ShowPlayerView(object? parameter = null)
         {
             _isPlayerViewVisible = true;
             _isConfigurationViewVisible = false;
         }
-        public void ShowConfigurationView()
+        public void ShowConfigurationView(object? parameter = null)
         {
             IsPlayerViewVisible = false;
             IsConfigurationViewVisible = true;
+        }
+
+        public void ShowPackDialog()
+        {
+            // Skapa och visa det nya fönstret
+            var packDialogWindow = new CreateNewPackDialog();
+            packDialogWindow.Show();
         }
     }
 }

@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs"
         mc:Ignorable="d"
-        Title="CreateNewPackDialog" Height="450" Width="800">
+        Title="CreateNewPackDialog" Height="240" Width="200">
     <Grid>
-        
+        <Label>
+            New Question Pack
+        </Label>
+
+        <StackPanel>
+        <TextBlock Margin="10,28,10,5" >
+            <Bold>Pack Name:</Bold>
+        </TextBlock>
+
+            <TextBox Text="'PackName'" Margin="10,0,10,0" />
+
+            <TextBlock Margin="10,15,10,5">
+                <Bold>Difficulty:</Bold>
+            </TextBlock>
+
+            <TextBox Text="Medium" Margin="10,0,10,0" />
+
+            <TextBlock Margin="10,15,10,5">
+                <Bold>Time Limit:</Bold> 30 seconds
+            </TextBlock>
+            <Slider Minimum="0" Maximum="60" Margin="10,0,10,0" />
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+
+            <Button Content="Cancel" Width="50" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30,10,10,10"/>
+            <Button Content="Create" Width="50" Height="20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20,10,10,10"/>
+
+        </StackPanel>
+              
     </Grid>
 </Window>

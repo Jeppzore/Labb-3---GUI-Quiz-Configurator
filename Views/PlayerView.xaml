@@ -9,18 +9,75 @@
              DataContext="{Binding PlayerViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <!--Innehåller de komponenter man 
     ser i spelläget (View-Play)-->
-    
-    
+
+
     <Grid>
-        <Button Grid.Row="1"
-                VerticalAlignment="Center"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+        <Label Grid.Row="1"
+               Content="New Question"
+               FontSize="25"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <Label Grid.Row="1"
+               Content="Question x of x"
+               FontSize="15"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            
+        <Button Content="Answer 1"
+                Grid.Row="2"
+                Margin="20"
+                Width="150"
+                Height="60"
                 HorizontalAlignment="Center"
-                Content="{Binding TestData}"
-                Margin="10"
-                Command="{Binding UpdateButtonCommand}"
-                />
+                VerticalAlignment="Center"/>
+
+        <Button Content="Answer 2"
+                Grid.Row="2"
+                Margin="20"
+                Width="150"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+
+            <Button Content="Answer 3"
+                Grid.Row="2"
+                Margin="20"
+                Width="150"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+            <Button Content="Answer 4"
+                Grid.Row="2"
+                Margin="20"
+                Width="150"
+                Height="60"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+
+
     </Grid>
 </UserControl>

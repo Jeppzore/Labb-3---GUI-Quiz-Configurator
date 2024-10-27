@@ -12,10 +12,11 @@ namespace Labb_3___GUI_Quiz
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
 
             var pack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
-
             pack.TimeLimitInSeconds = 5;
+
 
         }
     }

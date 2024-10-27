@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using System;
 
 namespace Labb_3___GUI_Quiz.Command
 {
@@ -6,15 +7,22 @@ namespace Labb_3___GUI_Quiz.Command
     {
         private readonly Action<object> execute;
         private readonly Func<object?, bool> canExecute;
+        private Action showPlayerView;
 
         public event EventHandler? CanExecuteChanged;
 
-        public DelegateCommand(Action <Object> execute, Func<object?, bool> canExecute = null)
+        public DelegateCommand(Action<Object> execute, Func<object?, bool> canExecute = null)
         {
             ArgumentNullException.ThrowIfNull(execute);
             this.execute = execute;
             this.canExecute = canExecute;
         }
+
+
+        //public DelegateCommand(Action showPlayerView)
+        //{
+        //    this.showPlayerView = showPlayerView;
+        //}
 
         public void RaiseCanExecuteChanged()
         {
@@ -29,7 +37,7 @@ namespace Labb_3___GUI_Quiz.Command
         // Körs bara om CanExecute == true
         public void Execute(object? parameter)
         {
-            execute(parameter);
+            execute(parameter!);
         }
     }
 }

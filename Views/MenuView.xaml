@@ -13,7 +13,9 @@
             <MenuItem Header="_File">
                 <MenuItem 
                     x:Name="fileMenuQuestionPack"
-                    Header="_New Question Pack"/>
+                    Header="_New Question Pack"
+                    Command="{Binding ShowPackDialogCommand}"/>
+                
 
                 <MenuItem Header="_Select Question Pack">
                     <MenuItem 
@@ -25,13 +27,13 @@
                 <MenuItem 
                     x:Name="fileMenuDeleteQuestionPack"
                     Header="_Delete Question Pack"/>
-                
+                    
                 <Separator />
                 
                 <MenuItem 
                     x:Name="fileMenuImportQuestions"
                     Header="_Import Questions"/>
-                
+                    
                 <Separator />
                 
                 <MenuItem 
@@ -62,11 +64,13 @@
             <MenuItem Header="_View">
                 <MenuItem 
                     x:Name="viewMenuPlay"
-                    Header="_Play"/>
+                    Header="_Play"
+                    Command="{Binding ShowPlayerCommand}"/>
 
                 <MenuItem 
                     x:Name="viewMenuEdit"
-                    Header="_Edit">
+                    Header="_Edit"
+                    Command="{Binding ShowConfigurationCommand}">
                 </MenuItem>
 
                 <MenuItem 
