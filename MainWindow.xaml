@@ -9,12 +9,10 @@
         xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
         xmlns:command="clr-namespace:Labb_3___GUI_Quiz.Command"
         xmlns:converters="clr-namespace:Labb_3___GUI_Quiz.Converters"
-        xmlns:dialogs="clr-namespace:Labb_3___GUI_Quiz.Dialogs"      
-        
-        
+        xmlns:dialogs="clr-namespace:Labb_3___GUI_Quiz.Dialogs"                   
         d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="Quiz Configurator" Height="450" Width="800">
+        Title="Quiz Configurator" Height="450" Width="800" MinHeight="450" MinWidth="800">
     
     <!--<Window.InputBindings>
         <KeyBinding Key="U" Modifiers="Ctrl" Command="{Binding PlayerViewModel.UpdateButtonCommand}" />
@@ -22,6 +20,7 @@
 
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     </Window.Resources>
     
     <Grid>
@@ -33,14 +32,14 @@
         <!--Views-->
    
         <views:MenuView Grid.Row="0" />
-        
-        <views:ConfigurationView Grid.Row="1"
-            Visibility="{Binding IsConfigurationViewVisible, 
-            Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <views:PlayerView Grid.Row="1"
+        <views:ConfigurationView Grid.Row="1" />
+        <!--Visibility="{Binding IsConfigurationViewVisible, 
+            Converter={StaticResource BoolToVisibilityConverter}}" />-->
+
+        <!--<views:PlayerView Grid.Row="1"
             Visibility="{Binding IsPlayerViewVisible,
-            Converter={StaticResource BoolToVisibilityConverter}}" />
+            Converter={StaticResource BoolToVisibilityConverter}}" />-->
 
         <!--Ha någon command / state för vilket window som skall visas-->
 

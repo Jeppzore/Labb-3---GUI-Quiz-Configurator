@@ -1,12 +1,34 @@
-﻿<Window x:Class="Labb_3___GUI_Quiz.Dialogs.Window1"
+﻿<Window x:Class="Labb_3___GUI_Quiz.Dialogs.PackOptionsDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Pack options" Height="240" Width="200">
     <Grid>
-        
+        <Label>
+            Customize your packs
+        </Label>
+
+        <StackPanel>
+            <TextBlock Margin="10,28,10,5" >
+            <Bold>Pack Name:</Bold>
+            </TextBlock>
+
+            <TextBox Text="{}" Margin="10,0,10,0" />
+
+            <TextBlock Margin="10,15,10,5">
+                <Bold>Difficulty:</Bold>
+            </TextBlock>
+
+            <ComboBox Text="'Difficulty'" ItemsSource="{Binding QuestionPack.Difficulty}" Margin="10,0,10,0" />
+
+            <TextBlock Margin="10,15,10,5">
+                <Bold>Time Limit:</Bold>
+            </TextBlock>
+            <Slider Minimum="0" Maximum="60" Margin="10,0,10,0" />
+
+        </StackPanel>
     </Grid>
 </Window>

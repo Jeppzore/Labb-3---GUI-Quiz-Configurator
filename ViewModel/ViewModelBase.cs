@@ -41,8 +41,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public void ShowPlayerView(object? parameter = null)
         {
-            _isPlayerViewVisible = true;
-            _isConfigurationViewVisible = false;
+            IsPlayerViewVisible = true;
+            IsConfigurationViewVisible = false;
         }
         public void ShowConfigurationView(object? parameter = null)
         {
@@ -56,5 +56,13 @@ namespace Labb_3___GUI_Quiz.ViewModel
             var packDialogWindow = new CreateNewPackDialog();
             packDialogWindow.Show();
         }
+
+        public void ShowPackOptionsDialog()
+        {
+            // Skapa och visa det nya fönstret
+            var packOptionsDialogWindow = new PackOptionsDialog();
+            packOptionsDialogWindow.Show();
+        }
+
     }
 }

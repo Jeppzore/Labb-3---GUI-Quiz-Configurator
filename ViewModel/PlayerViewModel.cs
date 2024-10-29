@@ -27,31 +27,31 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             this.mainWindowViewModel = mainWindowViewModel;
 
-            TestData = "Start value: ";
+            //TestData = "Start value: ";
 
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
+            //timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromSeconds(1);
+            //timer.Tick += Timer_Tick;
             //timer.Start();
 
-            UpdateButtonCommand = new DelegateCommand(UpdateButton, CanUpdateButton);
+            //UpdateButtonCommand = new DelegateCommand(UpdateButton, CanUpdateButton);
             //AddQuestionCommand = new DelegateCommand(AddQuestion, CanAddQuestion);
         }
 
-        private bool CanUpdateButton(object? arg)
-        {
-            return TestData.Length < 20;
-        }
+        //private bool CanUpdateButton(object? arg)
+        //{
+        //    return TestData.Length < 20;
+        //}
 
-        private void UpdateButton(object obj)
-        {
-            TestData += "x";
-            UpdateButtonCommand.RaiseCanExecuteChanged();
-        }
+        //private void UpdateButton(object obj)
+        //{
+        //    TestData += "x";
+        //    UpdateButtonCommand.RaiseCanExecuteChanged();
+        //}
 
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            TestData += "x";
-        }
+        //private void Timer_Tick(object? sender, EventArgs e)
+        //{
+        //    TestData += "x";
+        //}
     }
 }

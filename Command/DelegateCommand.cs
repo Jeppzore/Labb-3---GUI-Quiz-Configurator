@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using System;
 
 namespace Labb_3___GUI_Quiz.Command
 {
@@ -7,7 +6,8 @@ namespace Labb_3___GUI_Quiz.Command
     {
         private readonly Action<object> execute;
         private readonly Func<object?, bool> canExecute;
-        private Action showPlayerView;
+
+        private Action? showPlayerView;
 
         public event EventHandler? CanExecuteChanged;
 
@@ -15,7 +15,7 @@ namespace Labb_3___GUI_Quiz.Command
         {
             ArgumentNullException.ThrowIfNull(execute);
             this.execute = execute;
-            this.canExecute = canExecute;
+            this.canExecute = canExecute ?? (_ => true);
         }
 
 
