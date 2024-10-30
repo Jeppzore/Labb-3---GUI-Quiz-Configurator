@@ -8,6 +8,7 @@ namespace Labb_3___GUI_Quiz.Command
         private readonly Func<object?, bool> canExecute;
 
         private Action? showPlayerView;
+        private Action showPackOptionsDialog;
 
         public event EventHandler? CanExecuteChanged;
 
@@ -17,7 +18,6 @@ namespace Labb_3___GUI_Quiz.Command
             this.execute = execute;
             this.canExecute = canExecute ?? (_ => true);
         }
-
 
         //public DelegateCommand(Action showPlayerView)
         //{

@@ -14,9 +14,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public ConfigurationViewModel ConfigurationViewModel { get; }
         public PlayerViewModel PlayerViewModel { get; }
-        public MenuViewModel MenuViewModel { get; }
         public LocalDataService LocalDataService { get; }
-        public WindowStyle WindowStyle { get; set; }
 
 
         public ICommand ShowPlayerCommand { get; }
@@ -39,9 +37,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
-            ConfigurationViewModel = new ConfigurationViewModel(this, MenuViewModel, LocalDataService);
+            ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
             PlayerViewModel = new PlayerViewModel(this);
-            MenuViewModel = new MenuViewModel(this);
 
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
 

@@ -1,8 +1,10 @@
-﻿namespace Labb_3___GUI_Quiz.Model
+﻿using System.ComponentModel;
+
+namespace Labb_3___GUI_Quiz.Model
 {
     enum Difficulty { Easy, Medium, Hard }
 
-    internal class QuestionPack
+    internal class QuestionPack : INotifyPropertyChanged
     {
         public string Name { get; set; }
 
@@ -22,5 +24,6 @@
             Questions = new List<Question>();
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

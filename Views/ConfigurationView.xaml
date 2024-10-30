@@ -18,7 +18,6 @@
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-
     </UserControl.Resources>
 
     <Grid><!--Visibility="{Binding SelectedQuestion, Converter={StaticResource BoolToVisibilityConverter}}"-->
@@ -32,7 +31,7 @@
 
         <Grid Grid.Column="0" Height="15" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0" >
             <Button Content="?"
-                    Command="{Binding MenuViewModel.OpenPackOptions}"
+                    Command="{Binding ShowPackOptionsDialogCommand}"
                     Width="15"
                     Height="15"
                     HorizontalAlignment="Left"

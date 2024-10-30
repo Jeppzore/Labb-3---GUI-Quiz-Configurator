@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs"
+        xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs" 
+        xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:ConfigurationViewModel}"
         mc:Ignorable="d"
         Title="Pack options" Height="240" Width="200">
     <Grid>
@@ -22,7 +24,9 @@
                 <Bold>Difficulty:</Bold>
             </TextBlock>
 
-            <ComboBox Text="'Difficulty'" ItemsSource="{Binding QuestionPack.Difficulty}" Margin="10,0,10,0" />
+            <ComboBox Text="'Difficulty'" ItemsSource="{Binding QuestionPack.Difficulty}" Margin="10,0,10,0">
+                <ComboBoxItem Content="{Binding QuestionPack.Difficulty}" />
+            </ComboBox>
 
             <TextBlock Margin="10,15,10,5">
                 <Bold>Time Limit:</Bold>

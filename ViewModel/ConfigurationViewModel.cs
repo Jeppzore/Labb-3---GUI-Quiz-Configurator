@@ -9,7 +9,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         private readonly MainWindowViewModel? mainWindowViewModel;
         private readonly LocalDataService _localDataService;
 
-        public MenuViewModel MenuViewModel { get; }
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
         public DelegateCommand ShowPackOptionsDialogCommand { get; }
@@ -33,9 +32,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
 
-        public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, MenuViewModel? menuViewModel, LocalDataService? localDataService)
+        public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
         {
-            MenuViewModel = menuViewModel;
             this.mainWindowViewModel = mainWindowViewModel;
             _localDataService = localDataService ?? new LocalDataService();
 
@@ -52,6 +50,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             AddQuestion = new DelegateCommand(AddQuestionHandler);
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
         }
+
+
         private void RemoveQuestionHandler(object? obj)
         {
             if (SelectedQuestion != null)

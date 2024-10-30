@@ -10,6 +10,7 @@ namespace Labb_3___GUI_Quiz.Dialogs
         public PackOptionsDialog()
         {
             InitializeComponent();
+            DataContext = new PackOptionsDialog();
         }
     }
 }
