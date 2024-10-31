@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Labb_3___GUI_Quiz.Model;
+using Labb_3___GUI_Quiz.ViewModel;
+using System.Windows;
 
 namespace Labb_3___GUI_Quiz.Dialogs
 {
@@ -7,10 +9,11 @@ namespace Labb_3___GUI_Quiz.Dialogs
     /// </summary>
     public partial class PackOptionsDialog : Window
     {
-        public PackOptionsDialog()
+        internal PackOptionsDialog(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
-            DataContext = new PackOptionsDialog();
+            DataContext = mainWindowViewModel;
+            //DataContext = new QuestionPack("<PackName>", Difficulty.Medium, 30);
         }
     }
 }

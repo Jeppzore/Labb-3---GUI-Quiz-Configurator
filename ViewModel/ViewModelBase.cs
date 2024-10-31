@@ -1,6 +1,7 @@
 ﻿using Labb_3___GUI_Quiz.Dialogs;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
@@ -37,32 +38,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Methods to show the correct view
 
-        public void ShowPlayerView(object? parameter = null)
-        {
-            IsPlayerViewVisible = true;
-            IsConfigurationViewVisible = false;
-        }
-        public void ShowConfigurationView(object? parameter = null)
-        {
-            IsPlayerViewVisible = false;
-            IsConfigurationViewVisible = true;
-        }
-
-        public void ShowPackDialog()
-        {
-            // Skapa och visa det nya fönstret
-            var packDialogWindow = new CreateNewPackDialog();
-            packDialogWindow.Show();
-        }
-
-        public void ShowPackOptionsDialog()
-        {
-            // Skapa och visa det nya fönstret
-            var packOptionsDialogWindow = new PackOptionsDialog();
-            packOptionsDialogWindow.Show();
-        }
 
     }
 }

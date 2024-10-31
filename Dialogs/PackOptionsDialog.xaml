@@ -5,34 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs" 
         xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewmodel:ConfigurationViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
+        DataContext="{Binding MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="Pack options" Height="240" Width="200">
+        Title="Pack options" Height="240" Width="200" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label>
-            Customize your packs
-        </Label>
 
         <StackPanel>
             <TextBlock Margin="10,28,10,5" >
             <Bold>Pack Name:</Bold>
             </TextBlock>
 
-            <TextBox Text="{}" Margin="10,0,10,0" />
+            <TextBox Text="{Binding ActivePack.Name, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
 
             <TextBlock Margin="10,15,10,5">
                 <Bold>Difficulty:</Bold>
             </TextBlock>
 
-            <ComboBox Text="'Difficulty'" ItemsSource="{Binding QuestionPack.Difficulty}" Margin="10,0,10,0">
-                <ComboBoxItem Content="{Binding QuestionPack.Difficulty}" />
+            <!--{Binding Difficulty, Mode=TwoWay}-->
+            <!--ItemsSource="{Binding Difficulty}" SelectedItem="{Binding Difficulty.Medium}"-->
+
+            <ComboBox SelectedIndex="1" Margin="10,0,10,0">
+                <ComboBoxItem Content="Easy" />
+                <ComboBoxItem Content="Medium" />
+                <ComboBoxItem Content="Hard" />
             </ComboBox>
 
             <TextBlock Margin="10,15,10,5">
                 <Bold>Time Limit:</Bold>
-            </TextBlock>
-            <Slider Minimum="0" Maximum="60" Margin="10,0,10,0" />
+                <Run Text="        " />               
+                <Run Text="{Binding ElementName=timeLimitSlider, Path=Value}" />
+                <Run Text="seconds" />
 
+            </TextBlock>
+            <Slider x:Name="timeLimitSlider"
+                    Minimum="5" 
+                    Maximum="60" 
+                    Margin="10,0,10,0"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="5"
+                    TickPlacement="BottomRight"
+                    Value="{Binding TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -8,7 +8,7 @@ namespace Labb_3___GUI_Quiz.Command
         private readonly Func<object?, bool> canExecute;
 
         private Action? showPlayerView;
-        private Action showPackOptionsDialog;
+        private Action? showPackOptionsDialog;
 
         public event EventHandler? CanExecuteChanged;
 

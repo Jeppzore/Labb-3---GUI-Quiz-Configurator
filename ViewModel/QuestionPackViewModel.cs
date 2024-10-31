@@ -18,6 +18,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             set
             {
                 model.Name = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
 
@@ -27,6 +28,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             set
             {
                 model.Difficulty = value;
+                RaisePropertyChanged(nameof(Difficulty));
             }
         }
 
@@ -36,7 +38,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             set
             {
                 model.TimeLimitInSeconds = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(nameof(TimeLimitInSeconds));
             }
         }
 
@@ -44,6 +46,11 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             this.model = model;
             this.Questions = new ObservableCollection<Question>(model.Questions);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Difficulty})";
         }
 
     }

@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs" 
         xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel"     
-        d:DataContext="{d:DesignInstance Type=viewmodel:QuestionPackViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
+       
         mc:Ignorable="d"
-        Title="Create new question pack" MinHeight="260" MaxHeight="260" MinWidth="200" MaxWidth="200">
+        Title="Create new question pack" MinHeight="260" MaxHeight="260" MinWidth="200" MaxWidth="200" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label>
-            New Question Pack
-        </Label>
+
+        <!--d:DataContext="{d:DesignInstance Type=viewmodel:QuestionPackViewModel}"-->
 
         <StackPanel>
         <TextBlock Margin="10,28,10,5" >
             <Bold>Pack Name:</Bold>
         </TextBlock>
 
-            <TextBox Text="{Binding Name}" Margin="10,0,10,0" />
+            <TextBox Text="{Binding NewPack.Name, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,10,0" />
 
             <TextBlock Margin="10,15,10,5">
                 <Bold>Difficulty:</Bold>
@@ -33,6 +33,9 @@
                 <ComboBoxItem Content="Hard" />
             </ComboBox>
 
+            <!--<ComboBox ItemsSource="{Binding Difficulty}" 
+                      SelectedItem="{Binding Difficulty}" Margin="10,0,10,0" />-->
+
             <TextBlock Margin="10,15,10,5">
                 <Bold>Time Limit:</Bold>
                 <Run Text="        " />               
@@ -41,10 +44,13 @@
 
             </TextBlock>
             <Slider x:Name="timeLimitSlider"
-                    Minimum="0" 
+                    Minimum="5" 
                     Maximum="60" 
                     Margin="10,0,10,0"
-                    Value="{Binding TimeLimitInSeconds}"/>
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="5"
+                    TickPlacement="BottomRight"
+                    Value="{Binding TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged}"/>
             
         </StackPanel>
 
@@ -58,16 +64,15 @@
                     VerticalAlignment="Bottom"
                     Margin="30,10,10,10"
                     Click="createPackButtonCancel_Click"/>
-            
+
             <Button x:Name="createPackButtonCreate"
                     Content="Create"
                     Width="50"
                     Height="20"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    Margin="20,10,10,10"/>
-
+                    Margin="20,10,10,10"
+                    Command='{Binding ConfirmAndCreateQuestionPackCommand}'/>
         </StackPanel>
-              
     </Grid>
 </Window>

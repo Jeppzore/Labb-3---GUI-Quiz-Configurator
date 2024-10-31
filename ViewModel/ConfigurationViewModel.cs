@@ -1,17 +1,19 @@
 ﻿using Labb_3___GUI_Quiz.Command;
+using Labb_3___GUI_Quiz.Dialogs;
 using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
+using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
     internal class ConfigurationViewModel : ViewModelBase
     {
-        private readonly MainWindowViewModel? mainWindowViewModel;
+        private readonly MainWindowViewModel? _mainWindowViewModel;
         private readonly LocalDataService _localDataService;
 
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
-        public DelegateCommand ShowPackOptionsDialogCommand { get; }
+        public DelegateCommand ShowOptionDialog { get; }
 
 
         private Question? _selectedQuestion;
@@ -30,11 +32,11 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        public QuestionPackViewModel? ActivePack { get => mainWindowViewModel?.ActivePack; }
+        public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
 
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
         {
-            this.mainWindowViewModel = mainWindowViewModel;
+            this._mainWindowViewModel = mainWindowViewModel;
             _localDataService = localDataService ?? new LocalDataService();
 
             var loadedQuestions = _localDataService?.LoadQuestions();
@@ -49,8 +51,15 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             AddQuestion = new DelegateCommand(AddQuestionHandler);
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
+            ShowOptionDialog = new DelegateCommand(ShowPackOptionsDialog);           
         }
 
+        public void ShowPackOptionsDialog(object? obj)
+        {
+            // Skapa och visa det nya fönstret
+            var packOptionsDialogWindow = new PackOptionsDialog(this._mainWindowViewModel);
+            packOptionsDialogWindow.ShowDialog();
+        }
 
         private void RemoveQuestionHandler(object? obj)
         {
@@ -77,7 +86,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 _localDataService?.SaveQuestions(ActivePack.Questions);
             }
         }
-
 
     }
 }
