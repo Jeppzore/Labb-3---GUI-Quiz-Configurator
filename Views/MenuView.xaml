@@ -14,24 +14,24 @@
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem 
-                    x:Name="fileMenuQuestionPack"
                     Header="_New Question Pack" Icon="{fa:Icon folderplus}"
                     Command="{Binding AddQuestionPackCommand}"/>
 
                 <!--Reads the list "Packs" of QuestionPakcs"-->
                 <MenuItem Header="_Select Question Pack" 
-                          ItemsSource="{Binding Packs}">
+                          ItemsSource="{Binding Packs}"
+                          Icon="{fa:Icon folderopen}">
                 </MenuItem>
 
                 <MenuItem 
-                    x:Name="fileMenuDeleteQuestionPack"
-                    Header="_Delete Question Pack"/>
+                    Header="_Delete Question Pack"
+                    Icon="{fa:Icon folderminus}"/>
                     
                 <Separator />
                 
                 <MenuItem 
-                    x:Name="fileMenuImportQuestions"
                     Header="_Import Questions"
+                    Icon="{fa:Icon fileimport}"
                     Command="{Binding TestCommand}"/>
                     
                 <Separator />
@@ -39,45 +39,46 @@
                 <MenuItem 
                     x:Name="fileMenuExit"
                     Header="E_xit"
+                    Icon="{fa:Icon dooropen}"
                     Click="fileMenuExit_Click"/>
             </MenuItem>
 
 
             <MenuItem Header="_Edit">
 
-                <MenuItem x:Name="editMenuAddQuestion" 
-                          Header="_Add Question"
+                <MenuItem Header="_Add Question"
                           InputGestureText="Ctrl+A"
+                          Icon="{fa:Icon plus}"
                           Command="{Binding TestCommand}"/>
                 
-                <MenuItem x:Name="editMenuRemoveQuestion" 
-                          Header="_Remove question"
+                <MenuItem Header="_Remove question"
                           InputGestureText="Ctrl+R"
+                          Icon="{fa:Icon minus}"
                           Command="{Binding TestCommand}"/>
 
-                <MenuItem x:Name="editMenuPackOptions" 
-                          Header="_Pack Options"
+                <MenuItem Header="_Pack Options"
                           InputGestureText="Ctrl+P"
+                          Icon="{fa:Icon gear}"
                           Command="{Binding TestCommand}"/>
 
             </MenuItem>
 
             <MenuItem Header="_View">
                 <MenuItem 
-                    x:Name="viewMenuPlay"
                     Header="_Play"
+                    Icon="{fa:Icon play}"
                     Command="{Binding ShowPlayerCommand}"/>
 
                 <MenuItem 
-                    x:Name="viewMenuEdit"
                     Header="_Edit"
+                    Icon="{fa:Icon pentosquare}"
                     Command="{Binding ShowConfigurationCommand}">
                 </MenuItem>
 
                 <MenuItem 
                     x:Name="viewMenuFullscreen"                    
                     Header="_Fullscreen"
-                    Icon="{fa:Icon magnifyingglass}"
+                    Icon="{fa:Icon expand}"
                     Click="viewMenuFullscreen_Click"/>
             </MenuItem>
 
