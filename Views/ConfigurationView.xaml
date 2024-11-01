@@ -27,7 +27,14 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{Binding ActivePack.Name}" FontWeight="Bold" Margin="10,28,0,0" />
+        <TextBlock Margin="10,28,0,0" FontWeight="Bold" >
+            <Run Text="{Binding ActivePack.Name}"/>
+            <Run Text=" | " />
+            <Run Text="{Binding ActivePack.Difficulty}" />
+            <Run Text=" | Time limit: " />
+            <Run Text="{Binding ActivePack.TimeLimitInSeconds}" />
+
+        </TextBlock>
 
         <Grid Grid.Column="0" Height="15" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0" >
             <Button Content="?"
@@ -76,7 +83,7 @@
                  SelectionMode="Extended">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel x:Name="stackpanelLeft" Grid.Column="0" >
+                    <StackPanel x:Name="stackpanelLeft" >
                         <TextBlock Text="Question" FontWeight="Bold" />
                         <TextBlock Text="{Binding Query}" />
                     </StackPanel>

@@ -23,7 +23,9 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public ICommand ShowPackDialogCommand { get; }
 
         public DelegateCommand ConfirmAndCreateQuestionPackCommand { get; }
+        public DelegateCommand TestCommand { get; }
         public DelegateCommand AddQuestionPackCommand { get; }
+
 
         private QuestionPackViewModel? _activePack;
 
@@ -44,18 +46,28 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
+            Packs = new ObservableCollection<QuestionPackViewModel>();
+
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
             PlayerViewModel = new PlayerViewModel(this);
 
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
+            Packs.Add(ActivePack);
 
             ShowPlayerCommand = new DelegateCommand(_ => ShowPlayerView());
             ShowConfigurationCommand = new DelegateCommand(param => ShowConfigurationView());
-            ShowPackDialogCommand = new DelegateCommand(param => ShowPackDialog());
 
-            ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
             AddQuestionPackCommand = new DelegateCommand(AddQuestionPack, CanAddQuestionPack);
+            ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
+
+            TestCommand = new DelegateCommand(Test);
         }
+
+        private void Test(object obj)
+        {
+            MessageBox.Show("Testing");
+        }
+
         private void AddQuestionPack(object obj)
         {
             NewPack = new QuestionPackViewModel(new QuestionPack("New Pack"));
@@ -66,9 +78,10 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void CreateQuestionPack(object obj)
         {
+       
             Packs.Add(NewPack!);
             ActivePack = NewPack;
-            _newPackDialog.Close();
+            _newPackDialog.Close();    
         }
 
 
@@ -89,14 +102,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             IsPlayerViewVisible = false;
             IsConfigurationViewVisible = true;
-        }
-
-        // DENNA KODEN BEHÖVER TAS BORT?! SKALL KÖRAS I METODEN "ADD QUESTION PACK"
-        public void ShowPackDialog()
-        {
-            // Skapa och visa det nya fönstret
-            var packDialogWindow = new CreateNewPackDialog();
-            packDialogWindow.ShowDialog();
         }
     }
 }

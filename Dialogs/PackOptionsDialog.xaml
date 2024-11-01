@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs" 
         xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
+        xmlns:converter="clr-namespace:Labb_3___GUI_Quiz.Converters"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         DataContext="{Binding MainWindowViewModel}"
         mc:Ignorable="d"
         Title="Pack options" Height="240" Width="200" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converter:DifficultyToStringConverter x:Key="DifficultyToStringConverter" />
+    </Window.Resources>
     <Grid>
 
         <StackPanel>
@@ -25,7 +29,7 @@
             <!--{Binding Difficulty, Mode=TwoWay}-->
             <!--ItemsSource="{Binding Difficulty}" SelectedItem="{Binding Difficulty.Medium}"-->
 
-            <ComboBox SelectedIndex="1" Margin="10,0,10,0">
+            <ComboBox SelectedIndex="{Binding ActivePack.Difficulty, Converter={StaticResource DifficultyToStringConverter}, Mode=TwoWay}" Margin="10,0,10,0">
                 <ComboBoxItem Content="Easy" />
                 <ComboBoxItem Content="Medium" />
                 <ComboBoxItem Content="Hard" />

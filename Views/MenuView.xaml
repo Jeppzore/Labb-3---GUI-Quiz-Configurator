@@ -15,15 +15,12 @@
             <MenuItem Header="_File">
                 <MenuItem 
                     x:Name="fileMenuQuestionPack"
-                    Header="_New Question Pack"
-                    Command="{Binding ShowPackDialogCommand}"/>
-                
+                    Header="_New Question Pack" Icon="{fa:Icon folderplus}"
+                    Command="{Binding AddQuestionPackCommand}"/>
 
-                <MenuItem Header="_Select Question Pack">
-                    <MenuItem 
-                      x:Name="fileMenuSelectQuestionPack"
-                      Header="_Available Question Pack">
-                    </MenuItem>
+                <!--Reads the list "Packs" of QuestionPakcs"-->
+                <MenuItem Header="_Select Question Pack" 
+                          ItemsSource="{Binding Packs}">
                 </MenuItem>
 
                 <MenuItem 
@@ -34,7 +31,8 @@
                 
                 <MenuItem 
                     x:Name="fileMenuImportQuestions"
-                    Header="_Import Questions"/>
+                    Header="_Import Questions"
+                    Command="{Binding TestCommand}"/>
                     
                 <Separator />
                 
@@ -49,15 +47,18 @@
 
                 <MenuItem x:Name="editMenuAddQuestion" 
                           Header="_Add Question"
-                          InputGestureText="Ctrl+A"/>
+                          InputGestureText="Ctrl+A"
+                          Command="{Binding TestCommand}"/>
                 
                 <MenuItem x:Name="editMenuRemoveQuestion" 
                           Header="_Remove question"
-                          InputGestureText="Ctrl+R"/>
+                          InputGestureText="Ctrl+R"
+                          Command="{Binding TestCommand}"/>
 
                 <MenuItem x:Name="editMenuPackOptions" 
                           Header="_Pack Options"
-                          InputGestureText="Ctrl+P"/>
+                          InputGestureText="Ctrl+P"
+                          Command="{Binding TestCommand}"/>
 
             </MenuItem>
 
@@ -76,6 +77,7 @@
                 <MenuItem 
                     x:Name="viewMenuFullscreen"                    
                     Header="_Fullscreen"
+                    Icon="{fa:Icon magnifyingglass}"
                     Click="viewMenuFullscreen_Click"/>
             </MenuItem>
 

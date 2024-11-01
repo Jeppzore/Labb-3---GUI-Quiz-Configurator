@@ -11,10 +11,13 @@ namespace Labb_3___GUI_Quiz.ViewModel
         private readonly MainWindowViewModel? _mainWindowViewModel;
         private readonly LocalDataService _localDataService;
 
+        // Command Properties
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
         public DelegateCommand ShowOptionDialog { get; }
 
+        // Question Properties
+        public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
 
         private Question? _selectedQuestion;
 
@@ -32,7 +35,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
 
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
         {
@@ -57,7 +59,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public void ShowPackOptionsDialog(object? obj)
         {
             // Skapa och visa det nya fönstret
-            var packOptionsDialogWindow = new PackOptionsDialog(this._mainWindowViewModel);
+            var packOptionsDialogWindow = new PackOptionsDialog(_mainWindowViewModel!);
             packOptionsDialogWindow.ShowDialog();
         }
 

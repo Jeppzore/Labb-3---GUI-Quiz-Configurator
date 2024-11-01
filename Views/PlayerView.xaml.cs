@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Labb_3___GUI_Quiz.ViewModel;
+using System.Windows.Controls;
 
 namespace Labb_3___GUI_Quiz.Views
 {
@@ -10,6 +11,7 @@ namespace Labb_3___GUI_Quiz.Views
         public PlayerView()
         {
             InitializeComponent();
+
         }
     }
 }
