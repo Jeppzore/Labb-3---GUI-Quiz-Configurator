@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Dialogs" 
-        xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel"     
+        xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
+        xmlns:converter="clr-namespace:Labb_3___GUI_Quiz.Converters"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
-       
         mc:Ignorable="d"
         Title="Create new question pack" MinHeight="260" MaxHeight="260" MinWidth="200" MaxWidth="200" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converter:DifficultyToStringConverter x:Key="DifficultyToStringConverter" />
+    </Window.Resources>       
+    
     <Grid>
 
         <!--d:DataContext="{d:DesignInstance Type=viewmodel:QuestionPackViewModel}"-->
@@ -27,7 +31,7 @@
             <!--{Binding Difficulty, Mode=TwoWay}-->
             <!--ItemsSource="{Binding Difficulty}" SelectedItem="{Binding Difficulty.Medium}"-->
 
-            <ComboBox SelectedIndex="1" Margin="10,0,10,0">
+            <ComboBox SelectedIndex="{Binding NewPack.Difficulty, Converter={StaticResource DifficultyToStringConverter}, Mode=TwoWay}" Margin="10,0,10,0">
                 <ComboBoxItem Content="Easy" />
                 <ComboBoxItem Content="Medium" />
                 <ComboBoxItem Content="Hard" />
@@ -50,7 +54,7 @@
                     IsSnapToTickEnabled="True"
                     TickFrequency="5"
                     TickPlacement="BottomRight"
-                    Value="{Binding TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged}"/>
+                    Value="{Binding NewPack.TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged}"/>
             
         </StackPanel>
 

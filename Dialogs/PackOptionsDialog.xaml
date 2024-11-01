@@ -49,7 +49,7 @@
                     IsSnapToTickEnabled="True"
                     TickFrequency="5"
                     TickPlacement="BottomRight"
-                    Value="{Binding TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged}"/>
+                    Value="{Binding ActivePack.TimeLimitInSeconds, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </Window>

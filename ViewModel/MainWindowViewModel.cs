@@ -70,7 +70,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void AddQuestionPack(object obj)
         {
-            NewPack = new QuestionPackViewModel(new QuestionPack("New Pack"));
+            NewPack = new QuestionPackViewModel(new QuestionPack());
 
             _newPackDialog = new CreateNewPackDialog();
             _newPackDialog.ShowDialog();

@@ -20,7 +20,8 @@
                 <!--Reads the list "Packs" of QuestionPakcs"-->
                 <MenuItem Header="_Select Question Pack" 
                           ItemsSource="{Binding Packs}"
-                          Icon="{fa:Icon folderopen}">
+                          Icon="{fa:Icon folderopen}"
+                          Command="{Binding TestCommand}">
                 </MenuItem>
 
                 <MenuItem 
