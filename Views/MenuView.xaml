@@ -44,22 +44,22 @@
             </MenuItem>
 
 
-            <MenuItem Header="_Edit">
+            <MenuItem Header="_Edit" DataContext="{Binding ConfigurationViewModel}">
 
                 <MenuItem Header="_Add Question"
                           InputGestureText="Ctrl+A"
                           Icon="{fa:Icon plus}"
-                          Command="{Binding TestCommand}"/>
+                          Command="{Binding AddQuestion}"/>
                 
                 <MenuItem Header="_Remove question"
                           InputGestureText="Ctrl+R"
                           Icon="{fa:Icon minus}"
-                          Command="{Binding TestCommand}"/>
+                          Command="{Binding RemoveQuestion}"/>
 
                 <MenuItem Header="_Pack Options"
                           InputGestureText="Ctrl+P"
                           Icon="{fa:Icon gear}"
-                          Command="{Binding TestCommand}"/>
+                          Command="{Binding ShowOptionDialog}"/>
 
             </MenuItem>
 

@@ -27,7 +27,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Margin="10,28,0,0" FontWeight="Bold" >
+        <TextBlock Margin="10,28,0,0" FontWeight="Bold" MaxWidth="325" HorizontalAlignment="Left" TextWrapping="NoWrap">
             <Run Text="{Binding ActivePack.Name}"/>
             <Run Text=" | " />
             <Run Text="{Binding ActivePack.Difficulty}" />
@@ -37,17 +37,17 @@
         </TextBlock>
 
         <Grid Grid.Column="0" Height="15" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0" >
-            <Button Content="?"
-                    Command="{Binding ShowOptionDialog}"
+            <Button Command="{Binding ShowOptionDialog}"
                     Width="15"
                     Height="15"
                     HorizontalAlignment="Left"
                     Grid.Column="0"
                     Margin="8,0,3,0"
                     ToolTip="Pack Options">
+                <fa:IconImage Icon="Gear" Width="10" Height="10" />
+                
             </Button>
             <Button x:Name="buttonAddQuestion"
-                    Content="+"
                     Command="{Binding AddQuestion}"
                     Width="15"
                     Height="15"
@@ -55,11 +55,11 @@
                     Grid.Column="0"
                     Margin="8,0,3,0"
                     ToolTip="Add Question">
+                <fa:IconImage Icon="Plus" Width="10" Height="10" />
 
             </Button>
 
             <Button x:Name="buttonRemoveQuestion"
-                    Content="-"
                     Command="{Binding RemoveQuestion}"
                     Width="15"
                     Height="15"
@@ -67,7 +67,8 @@
                     Grid.Column="0"
                     Margin="8,0,3,0"
                     ToolTip="Remove Question">
-
+                <fa:IconImage Icon="Minus" Width="10" Height="10" />
+                
             </Button>
         </Grid>
 

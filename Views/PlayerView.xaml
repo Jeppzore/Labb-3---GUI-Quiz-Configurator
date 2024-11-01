@@ -76,8 +76,5 @@
                 VerticalAlignment="Center"/>
 
         </StackPanel>
-
-
-
     </Grid>
 </UserControl>
