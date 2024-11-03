@@ -18,15 +18,21 @@
                     Command="{Binding AddQuestionPackCommand}"/>
 
                 <!--Reads the list "Packs" of QuestionPakcs"-->
+                
+                <!--TODO: Make a way to Select an item from Packs-list
+                and bind a Command to it (SelectQuestionPackCommand)-->
+                
                 <MenuItem Header="_Select Question Pack" 
                           ItemsSource="{Binding Packs}"
-                          Icon="{fa:Icon folderopen}"
-                          Command="{Binding TestCommand}">
+                          Command="{Binding SelectQuestionPackCommand}"
+                          Icon="{fa:Icon folderopen}" >
                 </MenuItem>
 
                 <MenuItem 
                     Header="_Delete Question Pack"
-                    Icon="{fa:Icon folderminus}"/>
+                    Icon="{fa:Icon folderminus}"
+                    Command="{Binding RemoveQuestionPackCommand}"
+                    />
                     
                 <Separator />
                 

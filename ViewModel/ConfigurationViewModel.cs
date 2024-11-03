@@ -76,10 +76,14 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void AddQuestionHandler(object? obj)
         {
-            var newQuestion = new Question("New Question", "", "", "", "");
-            ActivePack?.Questions.Add(newQuestion);
-            SelectedQuestion = newQuestion;
-            _localDataService?.SaveQuestions(ActivePack?.Questions);
+            if (ActivePack  != null)
+            {
+                var newQuestion = new Question("New Question", "", "", "", "");
+                ActivePack?.Questions.Add(newQuestion);
+                SelectedQuestion = newQuestion;
+                _localDataService?.SaveQuestions(ActivePack?.Questions);
+            }
+
         }
         public void SaveQuestions()
         {

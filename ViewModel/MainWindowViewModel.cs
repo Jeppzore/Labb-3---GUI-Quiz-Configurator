@@ -23,6 +23,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public ICommand ShowPackDialogCommand { get; }
 
         public DelegateCommand ConfirmAndCreateQuestionPackCommand { get; }
+        public DelegateCommand SelectQuestionPackCommand { get; }
+        public DelegateCommand RemoveQuestionPackCommand { get; }
         public DelegateCommand TestCommand { get; }
         public DelegateCommand AddQuestionPackCommand { get; }
 
@@ -59,8 +61,50 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             AddQuestionPackCommand = new DelegateCommand(AddQuestionPack, CanAddQuestionPack);
             ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
+            SelectQuestionPackCommand = new DelegateCommand(SelectQuestionPack);
+            RemoveQuestionPackCommand = new DelegateCommand(RemoveQuestionPack);
 
             TestCommand = new DelegateCommand(Test);
+        }
+
+        private void RemoveQuestionPack(object obj)
+        {
+            if (ActivePack != null)
+            {
+                var Result = MessageBox.Show($"Do you want to delete: '{ActivePack}'?", $"Delete: '{ActivePack}'?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show($"Deleted {ActivePack}");
+                    Packs.Remove(ActivePack);
+                    // Logik för att sätta ny ActivePack till det senast tillagda QuestionPack
+                    if (Packs.Count > 0)
+                    {
+                        ActivePack = Packs[^1]; // Sätter ActivePack till det sista objektet i listan
+                        SelectQuestionPack(ActivePack);
+                    }
+                    else
+                    {
+                        ActivePack = null; // Om listan är tom
+                    }
+
+                }
+                else if (Result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void SelectQuestionPack(object obj)
+        {
+            //MessageBox.Show($"Selected {ActivePack}");
+
+            if (obj is QuestionPackViewModel selectedPack)
+            {
+                ActivePack = selectedPack;
+                // Här kan du lägga till mer logik om du vill göra något specifikt med det valda question packet.
+            }
         }
 
         private void Test(object obj)
