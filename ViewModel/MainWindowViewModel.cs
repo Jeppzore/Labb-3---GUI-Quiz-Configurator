@@ -53,7 +53,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
             PlayerViewModel = new PlayerViewModel(this);
 
-            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
+            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));      
             Packs.Add(ActivePack);
 
             ShowPlayerCommand = new DelegateCommand(_ => ShowPlayerView());
@@ -98,11 +98,11 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void SelectQuestionPack(object obj)
         {
-            //MessageBox.Show($"Selected {ActivePack}");
 
             if (obj is QuestionPackViewModel selectedPack)
             {
                 ActivePack = selectedPack;
+                MessageBox.Show($"Selected {ActivePack}");
                 // Här kan du lägga till mer logik om du vill göra något specifikt med det valda question packet.
             }
         }
@@ -110,6 +110,19 @@ namespace Labb_3___GUI_Quiz.ViewModel
         private void Test(object obj)
         {
             MessageBox.Show("Testing");
+        }
+
+        private void UpdateActivePack()
+        {
+            if (Packs.Contains(ActivePack))
+            {
+                int index = Packs.IndexOf(ActivePack);
+                Packs[index] = ActivePack; // Uppdaterar och triggar notifiering i gränssnittet
+            }
+            else
+            {
+                Packs.Add(ActivePack);
+            }
         }
 
         private void AddQuestionPack(object obj)

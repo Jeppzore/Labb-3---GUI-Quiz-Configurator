@@ -6,11 +6,48 @@ namespace Labb_3___GUI_Quiz.Model
 
     internal class QuestionPack : INotifyPropertyChanged
     {
-        public string Name { get; set; }
+        private string ?_name;
+        private Difficulty _difficulty;
+        private int _timeLimitInSeconds;
 
-        public Difficulty Difficulty { get; set; }
+        public string Name
+        {
+            get => _name!;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
 
-        public int TimeLimitInSeconds { get; set; }
+        public Difficulty Difficulty
+        {
+            get => _difficulty;
+            set
+            {
+                if (_difficulty != value)
+                {
+                    _difficulty = value;
+                    OnPropertyChanged(nameof(Difficulty));
+                }
+            }
+        }
+
+        public int TimeLimitInSeconds
+        {
+            get => _timeLimitInSeconds;
+            set
+            {
+                if (_timeLimitInSeconds != value)
+                {
+                    _timeLimitInSeconds = value;
+                    OnPropertyChanged(nameof(TimeLimitInSeconds));
+                }
+            }
+        }
 
         public List<Question> Questions { get; set; }
 
@@ -25,5 +62,9 @@ namespace Labb_3___GUI_Quiz.Model
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

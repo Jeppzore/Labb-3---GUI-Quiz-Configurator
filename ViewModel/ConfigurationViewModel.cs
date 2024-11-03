@@ -58,7 +58,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public void ShowPackOptionsDialog(object? obj)
         {
-            // Skapa och visa det nya fönstret
             var packOptionsDialogWindow = new PackOptionsDialog(_mainWindowViewModel!);
             packOptionsDialogWindow.ShowDialog();
         }

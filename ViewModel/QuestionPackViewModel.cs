@@ -8,7 +8,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         // Fields
         private readonly QuestionPack model;
 
-
         // Properties
         public ObservableCollection<Question> Questions { get; }
 
@@ -50,7 +49,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public override string ToString()
         {
-            return $"{Name} ({Difficulty})";
+            return $"{Name} ({Difficulty}) - {TimeLimitInSeconds} seconds";
         }
 
     }

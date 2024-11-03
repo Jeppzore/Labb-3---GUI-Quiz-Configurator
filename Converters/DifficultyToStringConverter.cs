@@ -9,7 +9,7 @@ namespace Labb_3___GUI_Quiz.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var difficulty = (Difficulty)value;
-            return ((int)difficulty);
+            return (int)difficulty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
