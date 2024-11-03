@@ -102,8 +102,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             if (obj is QuestionPackViewModel selectedPack)
             {
                 ActivePack = selectedPack;
-                MessageBox.Show($"Selected {ActivePack}");
-                // Här kan du lägga till mer logik om du vill göra något specifikt med det valda question packet.
             }
         }
 
@@ -112,18 +110,18 @@ namespace Labb_3___GUI_Quiz.ViewModel
             MessageBox.Show("Testing");
         }
 
-        private void UpdateActivePack()
-        {
-            if (Packs.Contains(ActivePack))
-            {
-                int index = Packs.IndexOf(ActivePack);
-                Packs[index] = ActivePack; // Uppdaterar och triggar notifiering i gränssnittet
-            }
-            else
-            {
-                Packs.Add(ActivePack);
-            }
-        }
+        //private void UpdateActivePack()
+        //{
+        //    if (Packs.Contains(ActivePack))
+        //    {
+        //        int index = Packs.IndexOf(ActivePack);
+        //        Packs[index] = ActivePack;
+        //    }
+        //    else
+        //    {
+        //        Packs.Add(ActivePack);
+        //    }
+        //}
 
         private void AddQuestionPack(object obj)
         {

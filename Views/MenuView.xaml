@@ -32,10 +32,17 @@
                           Icon="{fa:Icon folderopen}">
                     <MenuItem.ItemTemplate>
                             <DataTemplate>
-                                <MenuItem Header="{Binding Name}"
-                                          Icon="{fa:Icon chevronright}"
-                                          Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                          CommandParameter="{Binding}" />
+                            <MenuItem Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                      CommandParameter="{Binding}">
+
+                                <MenuItem.Header>
+                                    <StackPanel Orientation="Vertical" Margin="0,5,0,5">
+                                        <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Difficulty}" FontStyle="Italic"/>
+                                        <TextBlock Text="{Binding TimeLimitInSeconds, StringFormat='Time Limit: {0} seconds'}"/>
+                                    </StackPanel>
+                                </MenuItem.Header>
+                            </MenuItem>
                             </DataTemplate>
                     </MenuItem.ItemTemplate>
                 </MenuItem>
