@@ -12,7 +12,7 @@ namespace Labb_3___GUI_Quiz.Views
         public PlayerView()
         {
             InitializeComponent();
-
+            //DataContext = new PlayerViewModel();
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {

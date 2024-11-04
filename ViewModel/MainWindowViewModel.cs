@@ -73,7 +73,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
-
+            IsConfigurationViewVisible = true;
             Packs = new ObservableCollection<QuestionPackViewModel>();
 
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);

@@ -6,36 +6,76 @@ namespace Labb_3___GUI_Quiz.ViewModel
     internal class PlayerViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? mainWindowViewModel;
+        private DispatcherTimer ?_timer;
 
-        private DispatcherTimer timer;
-
-        private string _testData;
-
-        public string TestData
+        private int _timeRemaining;
+        public int TimeRemaining
         {
-            get => _testData;
+            get => _timeRemaining;
             private set
             {
-                _testData = value;
-                RaisePropertyChanged();
+                _timeRemaining = value;
+                RaisePropertyChanged(nameof(TimeRemaining));
             }
         }
-
 
         public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
         {
             this.mainWindowViewModel = mainWindowViewModel;
 
-            //TestData = "Start value: ";
+            if (this.mainWindowViewModel?.ActivePack != null)
+            {
+                TimeRemaining = this.mainWindowViewModel.ActivePack.TimeLimitInSeconds;
+            }
 
-            //timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromSeconds(1);
-            //timer.Tick += Timer_Tick;
-            //timer.Start();
-
-            //UpdateButtonCommand = new DelegateCommand(UpdateButton, CanUpdateButton);
-            //AddQuestionCommand = new DelegateCommand(AddQuestion, CanAddQuestion);
+            // Starta timern
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            if (TimeRemaining > 0)
+            {
+                TimeRemaining--;
+            }
+            else
+            {
+                _timer!.Stop();
+            }
+        }
+    }
+}
+        //private string ?_testData;
+
+        //public string TestData
+        //{
+        //    get => _testData!;
+        //    private set
+        //    {
+        //        _testData = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
+
+        //public EventHandler? Timer_Tick { get; }
+
+        //public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
+        //{
+        //    this.mainWindowViewModel = mainWindowViewModel;
+
+        //    TestData = "Start value: ";
+
+        //    _timer = new DispatcherTimer();
+        //    _timer.Interval = TimeSpan.FromSeconds(1);
+        //    _timer.Tick += Timer_Tick;
+        //    _timer.Start();
+
+        //}
 
         //private bool CanUpdateButton(object? arg)
         //{
@@ -50,7 +90,5 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         //private void Timer_Tick(object? sender, EventArgs e)
         //{
-        //    TestData += "x";
+        //    TestData += "x";          
         //}
-    }
-}

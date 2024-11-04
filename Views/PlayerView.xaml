@@ -14,20 +14,23 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-
         </Grid.RowDefinitions>
 
+        <TextBlock Width="50" Height="50" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="30" Margin="0,15,35,0" 
+                   Text="{Binding ActivePack.TimeLimitInSeconds}" />
+
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-        <Label Grid.Row="1"
+
+            <Label Grid.Row="1"
                Content="{Binding SelectedQuestion.Query}"
-               FontSize="25"
+               FontSize="20"
                HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center"/>
+               VerticalContentAlignment="Center">
+            </Label>
 
         <Label Grid.Row="1"
-               Content="Question x of x"
-               FontSize="15"
+               Content="{Binding ActivePack.Questions.Count}"
+               FontSize="12"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"/>
         </StackPanel>

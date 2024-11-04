@@ -22,7 +22,7 @@
                           Icon="{fa:Icon folderopen}">
                     <MenuItem.ItemTemplate>
                             <DataTemplate>
-                            <MenuItem Command="{Binding SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            <MenuItem Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                       CommandParameter="{Binding}">
 
                                 <MenuItem.Header>
