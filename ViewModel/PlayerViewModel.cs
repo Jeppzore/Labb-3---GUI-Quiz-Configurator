@@ -21,7 +21,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        public DelegateCommand UpdateButtonCommand { get; }
 
         public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
         {

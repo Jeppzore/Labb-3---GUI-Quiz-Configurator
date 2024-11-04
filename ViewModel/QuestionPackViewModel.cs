@@ -11,6 +11,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         // Properties
         public ObservableCollection<Question> Questions { get; }
 
+
         public string Name
         {
             get => model.Name;

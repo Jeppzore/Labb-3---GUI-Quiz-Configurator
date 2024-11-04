@@ -5,16 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views" 
              xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
-             d:DataContext="{d:DesignInstance Type=viewmodel:PlayerViewModel}"
-             DataContext="{Binding PlayerViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConfigurationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--Innehåller de komponenter man 
-    ser i spelläget (View-Play)-->
-
-
-    <Grid>
+    <Grid DataContext="{Binding ConfigurationViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -25,7 +20,7 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             
         <Label Grid.Row="1"
-               Content="New Question"
+               Content="{Binding SelectedQuestion.Query}"
                FontSize="25"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"/>
@@ -39,7 +34,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
             
-        <Button Content="Answer 1"
+        <Button Content="{Binding SelectedQuestion.CorrectAnswer}"
+                Command="{Binding PlayerAnswerCorrect}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -47,7 +43,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
-        <Button Content="Answer 2"
+        <Button Content="{Binding SelectedQuestion.IncorrectAnswers[0]}"
+                Command="{Binding PlayerAnswerWrong}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -59,7 +56,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
 
-            <Button Content="Answer 3"
+            <Button Content="{Binding SelectedQuestion.IncorrectAnswers[1]}"
+                Command="{Binding PlayerAnswerWrong}"                                  
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -67,7 +65,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
-            <Button Content="Answer 4"
+            <Button Content="{Binding SelectedQuestion.IncorrectAnswers[2]}"
+                Command="{Binding PlayerAnswerWrong}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"

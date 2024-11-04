@@ -20,8 +20,7 @@
     </Window.InputBindings>-->
 
     <Window.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     
     <Grid>
@@ -34,15 +33,13 @@
    
         <views:MenuView Grid.Row="0" />
 
-        <views:ConfigurationView Grid.Row="1" />
-        
-        
-        <!--Visibility="{Binding IsConfigurationViewVisible, 
-            Converter={StaticResource BoolToVisibilityConverter}}" />-->
+        <views:ConfigurationView Grid.Row="1"
+            Visibility="{Binding IsConfigurationViewVisible, 
+            Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-        <!--<views:PlayerView Grid.Row="1"
+        <views:PlayerView Grid.Row="1"
             Visibility="{Binding IsPlayerViewVisible,
-            Converter={StaticResource BoolToVisibilityConverter}}" />-->
+            Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <!--Ha någon command / state för vilket window som skall visas-->
 

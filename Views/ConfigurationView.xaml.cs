@@ -14,7 +14,7 @@ namespace Labb_3___GUI_Quiz.Views
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var viewModel = (ConfigurationViewModel)DataContext;
+            var viewModel = (DataContext as MainWindowViewModel).ConfigurationViewModel;
             viewModel.SaveQuestions();
 
         }

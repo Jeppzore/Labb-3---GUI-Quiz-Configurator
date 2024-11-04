@@ -2,6 +2,8 @@
 using Labb_3___GUI_Quiz.Dialogs;
 using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
+using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
@@ -9,12 +11,15 @@ namespace Labb_3___GUI_Quiz.ViewModel
     internal class ConfigurationViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? _mainWindowViewModel;
-        private readonly LocalDataService _localDataService;
+        private readonly LocalDataService? _localDataService;
 
         // Command Properties
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
         public DelegateCommand ShowOptionDialog { get; }
+
+        public DelegateCommand PlayerAnswerCorrect { get; }
+        public DelegateCommand PlayerAnswerWrong { get; }
 
         // Question Properties
         public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
@@ -30,10 +35,44 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 {
                     _selectedQuestion = value;
                     RaisePropertyChanged();
+                    //ShuffleAnswers();
                     RemoveQuestion.RaiseCanExecuteChanged();
                 }
             }
         }
+
+        private Random _random = new Random();
+
+        public ObservableCollection<string> ShuffledAnswers { get; set; } = new ObservableCollection<string>();
+
+        // TODO: Fixa en metod som shufflar svaren varje gång en ny question laddas (om det finns 1 rätt och 3 inkorrekta svar)
+        //public void ShuffleAnswers()
+        //{
+        //    // Hämta alla svar: det korrekta svaret och de tre felaktiga
+        //    var allAnswers = new List<string>(SelectedQuestion.IncorrectAnswers) { SelectedQuestion.CorrectAnswer };
+
+        //    // Slumpa ordningen
+        //    ShuffledAnswers = new ObservableCollection<string>(allAnswers.OrderBy(x => _random.Next()));
+        //    RaisePropertyChanged(nameof(ShuffledAnswers));
+        //}
+
+        // TODO: Fixa så att Add´Question inte går att klicka på när QUestionPack inte finns.
+        //private QuestionPack? _selectedQuestionPack;
+
+        //public QuestionPack? SelectedQuestionPack
+        //{
+        //    get => _selectedQuestionPack;
+        //    set
+        //    {
+        //        if (_selectedQuestionPack != value)
+        //        {
+        //            _selectedQuestionPack = value;
+        //            RaisePropertyChanged();
+        //            AddQuestion.RaiseCanExecuteChanged();
+        //        }
+        //    }
+        //}
+
 
 
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
@@ -51,9 +90,22 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 }
             }
 
-            AddQuestion = new DelegateCommand(AddQuestionHandler);
+            AddQuestion = new DelegateCommand(AddQuestionHandler); //(CanAddQuestion)
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
-            ShowOptionDialog = new DelegateCommand(ShowPackOptionsDialog);           
+            ShowOptionDialog = new DelegateCommand(ShowPackOptionsDialog);
+
+            PlayerAnswerCorrect = new DelegateCommand(CorrectAnswer);
+            PlayerAnswerWrong = new DelegateCommand(WrongAnswer);
+        }
+
+        private void WrongAnswer(object obj)
+        {
+            MessageBox.Show("Wrong!");
+        }
+
+        private void CorrectAnswer(object obj)
+        {
+            MessageBox.Show("Correct!");
         }
 
         public void ShowPackOptionsDialog(object? obj)
@@ -72,6 +124,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
         private bool CanRemoveQuestion(object? obj) => SelectedQuestion != null;
+        //private bool CanAddQuestion(object? obj) => SelectedQuestionPack != null;
+
 
         private void AddQuestionHandler(object? obj)
         {

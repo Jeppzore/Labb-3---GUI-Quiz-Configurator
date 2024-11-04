@@ -16,23 +16,13 @@
                 <MenuItem 
                     Header="_New Question Pack" Icon="{fa:Icon folderplus}"
                     Command="{Binding AddQuestionPackCommand}"/>
-                
-                <!--TODO: Make a way to Select an item from Packs-list
-                and bind a Command to it (SelectQuestionPackCommand)-->
-                
-                <!--<MenuItem Header="_Select Question Pack" 
-                          ItemsSource="{Binding Packs}"
-                          Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                          CommandParameter="{Binding SelectQuestionPackCommand}"
-                          Icon="{fa:Icon folderopen}" >
-                </MenuItem>-->
 
                 <MenuItem Header="_Select Question Pack" 
                           ItemsSource="{Binding Packs}"
                           Icon="{fa:Icon folderopen}">
                     <MenuItem.ItemTemplate>
                             <DataTemplate>
-                            <MenuItem Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            <MenuItem Command="{Binding SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                       CommandParameter="{Binding}">
 
                                 <MenuItem.Header>

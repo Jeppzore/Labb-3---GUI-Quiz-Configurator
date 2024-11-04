@@ -18,15 +18,40 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public LocalDataService LocalDataService { get; }
 
 
-        public ICommand ShowPlayerCommand { get; }
-        public ICommand ShowConfigurationCommand { get; }
-        public ICommand ShowPackDialogCommand { get; }
+        //public ICommand ShowPackDialogCommand { get; }
+
+        public DelegateCommand ShowPlayerCommand { get; }
+        public DelegateCommand ShowConfigurationCommand { get; }
 
         public DelegateCommand ConfirmAndCreateQuestionPackCommand { get; }
         public DelegateCommand SelectQuestionPackCommand { get; }
         public DelegateCommand RemoveQuestionPackCommand { get; }
-        public DelegateCommand TestCommand { get; }
         public DelegateCommand AddQuestionPackCommand { get; }
+
+        public DelegateCommand TestCommand { get; }
+
+        private bool _isPlayerViewVisible;
+        private bool _isConfigurationViewVisible;
+
+        public bool IsPlayerViewVisible
+        {
+            get { return _isPlayerViewVisible; }
+            set
+            {
+                _isPlayerViewVisible = value;
+                RaisePropertyChanged(nameof(IsPlayerViewVisible));
+            }
+        }
+
+        public bool IsConfigurationViewVisible
+        {
+            get { return _isConfigurationViewVisible; }
+            set
+            {
+                _isConfigurationViewVisible = value;
+                RaisePropertyChanged(nameof(IsConfigurationViewVisible));
+            }
+        }
 
 
         private QuestionPackViewModel? _activePack;
@@ -48,6 +73,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
+
             Packs = new ObservableCollection<QuestionPackViewModel>();
 
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
@@ -56,8 +82,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));      
             Packs.Add(ActivePack);
 
-            ShowPlayerCommand = new DelegateCommand(_ => ShowPlayerView());
-            ShowConfigurationCommand = new DelegateCommand(param => ShowConfigurationView());
+            ShowPlayerCommand = new DelegateCommand(ShowPlayerView);
+            ShowConfigurationCommand = new DelegateCommand(ShowConfigurationView);
 
             AddQuestionPackCommand = new DelegateCommand(AddQuestionPack, CanAddQuestionPack);
             ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
@@ -66,6 +92,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             TestCommand = new DelegateCommand(Test);
         }
+
+
 
         private void RemoveQuestionPack(object obj)
         {
@@ -77,7 +105,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 {
                     MessageBox.Show($"Deleted {ActivePack}");
                     Packs.Remove(ActivePack);
-                    // Logik för att sätta ny ActivePack till det senast tillagda QuestionPack
+
                     if (Packs.Count > 0)
                     {
                         ActivePack = Packs[^1]; // Sätter ActivePack till det sista objektet i listan
@@ -98,7 +126,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void SelectQuestionPack(object obj)
         {
-
             if (obj is QuestionPackViewModel selectedPack)
             {
                 ActivePack = selectedPack;
@@ -133,7 +160,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void CreateQuestionPack(object obj)
         {
-       
             Packs.Add(NewPack!);
             ActivePack = NewPack;
             _newPackDialog.Close();    
@@ -148,12 +174,12 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         // Methods to show the correct view
 
-        public void ShowPlayerView(object? parameter = null)
+        public void ShowPlayerView(object? obj)
         {
             IsPlayerViewVisible = true;
             IsConfigurationViewVisible = false;
         }
-        public void ShowConfigurationView(object? parameter = null)
+        public void ShowConfigurationView(object? obj)
         {
             IsPlayerViewVisible = false;
             IsConfigurationViewVisible = true;
