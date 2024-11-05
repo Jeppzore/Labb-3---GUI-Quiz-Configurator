@@ -45,16 +45,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public ObservableCollection<string> ShuffledAnswers { get; set; } = new ObservableCollection<string>();
 
-        // TODO: Fixa en metod som shufflar svaren varje gång en ny question laddas (om det finns 1 rätt och 3 inkorrekta svar)
-        //public void ShuffleAnswers()
-        //{
-        //    // Hämta alla svar: det korrekta svaret och de tre felaktiga
-        //    var allAnswers = new List<string>(SelectedQuestion.IncorrectAnswers) { SelectedQuestion.CorrectAnswer };
-
-        //    // Slumpa ordningen
-        //    ShuffledAnswers = new ObservableCollection<string>(allAnswers.OrderBy(x => _random.Next()));
-        //    RaisePropertyChanged(nameof(ShuffledAnswers));
-        //}
 
         // TODO: Fixa så att Add´Question inte går att klicka på när QUestionPack inte finns.
         //private QuestionPack? _selectedQuestionPack;
@@ -131,7 +121,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             if (ActivePack  != null)
             {
-                var newQuestion = new Question("New Question", "", "", "", "");
+                var newQuestion = new Question("<New Question>", "", "", "", "");
                 ActivePack?.Questions.Add(newQuestion);
                 SelectedQuestion = newQuestion;
                 _localDataService?.SaveQuestions(ActivePack?.Questions);

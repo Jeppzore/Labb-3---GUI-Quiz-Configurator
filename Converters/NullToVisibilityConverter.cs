@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows;
 
 namespace Labb_3___GUI_Quiz.Converters
 {
@@ -8,11 +8,7 @@ namespace Labb_3___GUI_Quiz.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null)
-            {
-                return Visibility.Visible;
-            }
-            return Visibility.Collapsed;
+            return value == null ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

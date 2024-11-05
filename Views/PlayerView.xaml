@@ -5,40 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Labb_3___GUI_Quiz.Views" 
              xmlns:viewmodel="clr-namespace:Labb_3___GUI_Quiz.ViewModel" 
-             d:DataContext="{d:DesignInstance Type=viewmodel:ConfigurationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid DataContext="{Binding ConfigurationViewModel}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <!--TimeLimit Timer-->
 
         <TextBlock Width="50" Height="50" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="30" Margin="0,15,35,0" 
-                   Text="{Binding ActivePack.TimeLimitInSeconds}" />
+                   Text="{Binding PlayerViewModel.TimePerQuestion}" />
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <Label Grid.Row="1"
-               Content="{Binding SelectedQuestion.Query}"
+            
+            
+            <TextBlock Grid.Row="1"
+               Text="{Binding PlayerViewModel.CurrentQuestion.Query, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                FontSize="20"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center">
-            </Label>
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+            </TextBlock>
 
-        <Label Grid.Row="1"
-               Content="{Binding ActivePack.Questions.Count}"
-               FontSize="12"
-               HorizontalContentAlignment="Center"
-               VerticalContentAlignment="Center"/>
+            <TextBlock Grid.Row="1" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Text="{Binding PlayerViewModel.QuestionProgress}">
+            </TextBlock> 
         </StackPanel>
+        
+        <!--Answer Buttons-->
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
             
-        <Button Content="{Binding SelectedQuestion.CorrectAnswer}"
-                Command="{Binding PlayerAnswerCorrect}"
+        <Button Content="{Binding PlayerViewModel.Answer1, Mode=OneWay}"
+                Command="{Binding PlayerViewModel.SelectedAnswer}"
+                CommandParameter="{Binding PlayerViewModel.Answer1}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -46,8 +50,9 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
-        <Button Content="{Binding SelectedQuestion.IncorrectAnswers[0]}"
-                Command="{Binding PlayerAnswerWrong}"
+        <Button Content="{Binding PlayerViewModel.Answer2, Mode=OneWay}"
+                Command="{Binding PlayerViewModel.SelectedAnswer}"
+                CommandParameter="{Binding PlayerViewModel.Answer2}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -59,8 +64,9 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
 
-            <Button Content="{Binding SelectedQuestion.IncorrectAnswers[1]}"
-                Command="{Binding PlayerAnswerWrong}"                                  
+        <Button Content="{Binding PlayerViewModel.Answer3, Mode=OneWay}"
+                Command="{Binding PlayerViewModel.SelectedAnswer}"
+                CommandParameter="{Binding PlayerViewModel.Answer3}"                                
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
@@ -68,15 +74,15 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
 
-            <Button Content="{Binding SelectedQuestion.IncorrectAnswers[2]}"
-                Command="{Binding PlayerAnswerWrong}"
+        <Button Content="{Binding PlayerViewModel.Answer4, Mode=OneWay}"
+                Command="{Binding PlayerViewModel.SelectedAnswer}"
+                CommandParameter="{Binding PlayerViewModel.Answer4}"
                 Grid.Row="2"
                 Margin="20"
                 Width="150"
                 Height="60"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
-
         </StackPanel>
     </Grid>
 </UserControl>

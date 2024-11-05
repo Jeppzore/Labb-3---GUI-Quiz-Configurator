@@ -41,7 +41,5 @@
             Visibility="{Binding IsPlayerViewVisible,
             Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-        <!--Ha någon command / state för vilket window som skall visas-->
-
     </Grid>
 </Window>

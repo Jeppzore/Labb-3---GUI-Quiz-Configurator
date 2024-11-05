@@ -176,8 +176,23 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public void ShowPlayerView(object? obj)
         {
-            IsPlayerViewVisible = true;
-            IsConfigurationViewVisible = false;
+            if (ActivePack != null)
+            {
+                var Result = MessageBox.Show($"Do you want to Play: '{ActivePack}'?", $"Play: '{ActivePack}'?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (Result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show($"Good luck!");
+                    PlayerViewModel.StartQuiz(ActivePack.Questions, ActivePack.TimeLimitInSeconds);
+                }
+                else if (Result == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                IsPlayerViewVisible = true;
+                IsConfigurationViewVisible = false;
+            }        
         }
         public void ShowConfigurationView(object? obj)
         {

@@ -10,6 +10,8 @@ namespace Labb_3___GUI_Quiz.Model
         private Difficulty _difficulty;
         private int _timeLimitInSeconds;
 
+        public List<Question> Questions { get; set; }
+
         public string Name
         {
             get => _name!;
@@ -49,7 +51,6 @@ namespace Labb_3___GUI_Quiz.Model
             }
         }
 
-        public List<Question> Questions { get; set; }
 
 
         // When creating a new objekt of QuestionPack, the default value of difficulty and timelimit are set.

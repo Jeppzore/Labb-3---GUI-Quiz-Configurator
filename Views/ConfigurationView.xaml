@@ -12,7 +12,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     
     <UserControl.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     </UserControl.Resources>
 
@@ -126,7 +125,7 @@
             Correct Answer:
         </Bold>
             </TextBlock>
-            <TextBox Text="{Binding SelectedQuestion.CorrectAnswer, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Text="{Binding SelectedQuestion.CorrectAnswer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      LostFocus="TextBox_LostFocus"
                      Margin="7,3,17,0" />
             <TextBlock Margin="7,10,17,0">
