@@ -6,7 +6,7 @@ namespace Labb_3___GUI_Quiz.Services
 {
     internal class LocalDataService
     {
-        private readonly string filePath = "questions.json";
+        private readonly string filePath = "MinLabb3.json";
 
         private JsonSerializerOptions options = new JsonSerializerOptions
         {

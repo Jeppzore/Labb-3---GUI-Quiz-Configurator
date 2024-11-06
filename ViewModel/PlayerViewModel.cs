@@ -2,8 +2,8 @@
 using Labb_3___GUI_Quiz.Model;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
@@ -134,28 +134,27 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        private void OnSelectedAnswer(string selectedAnswer)
+        private async void OnSelectedAnswer(string selectedAnswer)
         {
             if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
             {
                 _correctAnswersCount++;
                 ButtonBackgrounds[selectedAnswer] = Brushes.Green;
                 RaisePropertyChanged(nameof(ButtonBackgrounds));
-                //Thread.Sleep(3000);
+                _timer.Stop();
+                await Task.Delay(1500);
+                _timer.Start();
                 LoadNextQuestion();
             }
             else
             {
                 ButtonBackgrounds[selectedAnswer] = Brushes.Red;
                 RaisePropertyChanged(nameof(ButtonBackgrounds));
-                //Thread.Sleep(3000);
+                _timer.Stop();
+                await Task.Delay(1500);
+                _timer.Start();
                 LoadNextQuestion();
             }
-        }
-
-        private void CorrectAnswersCount(string correctAnswer)
-        {
-            
         }
 
         private void QuestionTimer(object? sender, EventArgs e)
@@ -221,6 +220,16 @@ namespace Labb_3___GUI_Quiz.ViewModel
                                   .ToArray();
 
             return shuffledAnswers!;
+        }
+
+        //TODO: LoadQUestion should call on this method after each loaded question to reset the colors
+        public void ResetButtonBackgrounds()
+        {
+            foreach (var key in ButtonBackgrounds.Keys.ToList())
+            {
+                ButtonBackgrounds[key] = Brushes.Transparent;
+            }
+            RaisePropertyChanged(nameof(ButtonBackgrounds));
         }
 
         public void StopQuiz()

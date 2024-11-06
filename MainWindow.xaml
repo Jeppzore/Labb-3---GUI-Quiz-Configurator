@@ -15,9 +15,6 @@
         mc:Ignorable="d"
         Title="Quiz Configurator" Height="450" Width="800" MinHeight="450" MinWidth="800">
 
-    <!--<Window.InputBindings>
-        <KeyBinding Key="U" Modifiers="Ctrl" Command="{Binding PlayerViewModel.UpdateButtonCommand}" />
-    </Window.InputBindings>-->
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
