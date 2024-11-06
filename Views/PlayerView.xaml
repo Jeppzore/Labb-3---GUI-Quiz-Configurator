@@ -21,7 +21,6 @@
                    Text="{Binding PlayerViewModel.TimePerQuestion}" />
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-
             
             
             <TextBlock Grid.Row="1"

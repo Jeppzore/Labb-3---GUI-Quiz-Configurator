@@ -2,8 +2,10 @@
 using Labb_3___GUI_Quiz.Model;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
@@ -24,6 +26,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private int _currentQuestionCount;
         private int _totalQuestions;
+
+        private int _correctAnswersCount = 0;
 
         private int _timePerQuestion;
 
@@ -83,10 +87,22 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 _currentQuestion = value!;
                 RaisePropertyChanged(nameof(CurrentQuestion));
                 _currentAnswers = GetShuffledAnswers(CurrentQuestion!);
+
                 RaisePropertyChanged(nameof(Answer1));
                 RaisePropertyChanged(nameof(Answer2));
                 RaisePropertyChanged(nameof(Answer3));
                 RaisePropertyChanged(nameof(Answer4));
+            }
+        }
+
+        private Dictionary<string, Brush> _buttonBackgrounds = new Dictionary<string, Brush>();
+        public Dictionary<string, Brush> ButtonBackgrounds
+        {
+            get => _buttonBackgrounds;
+            set
+            {
+                _buttonBackgrounds = value;
+                RaisePropertyChanged(nameof(ButtonBackgrounds));
             }
         }
 
@@ -122,14 +138,24 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
             {
-                MessageBox.Show("Correct!");
+                _correctAnswersCount++;
+                ButtonBackgrounds[selectedAnswer] = Brushes.Green;
+                RaisePropertyChanged(nameof(ButtonBackgrounds));
+                //Thread.Sleep(3000);
                 LoadNextQuestion();
             }
             else
             {
-                MessageBox.Show("WROOOONG!");
+                ButtonBackgrounds[selectedAnswer] = Brushes.Red;
+                RaisePropertyChanged(nameof(ButtonBackgrounds));
+                //Thread.Sleep(3000);
                 LoadNextQuestion();
             }
+        }
+
+        private void CorrectAnswersCount(string correctAnswer)
+        {
+            
         }
 
         private void QuestionTimer(object? sender, EventArgs e)
@@ -177,20 +203,46 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
             else
             {
+                // If there are no more questions to load, stop the quiz.
                 _timer.Stop();
+                StopQuiz();
             }
         }
         private string[] GetShuffledAnswers(Question question)
         {
-            var answers = question.IncorrectAnswers!.Append(question.CorrectAnswer).ToList();
-            return answers.OrderBy(a => _random.Next()).ToArray();
+            // Get the incorrect answers and add the correct answer
+            var answers = question.IncorrectAnswers!
+                                  .Append(question.CorrectAnswer)
+                                  .ToList();
+
+            // Shuffle the order of the answers and return them as an array.
+            var shuffledAnswers = answers
+                                  .OrderBy(_ => _random.Next())
+                                  .ToArray();
+
+            return shuffledAnswers!;
         }
 
         public void StopQuiz()
         {
             _timer.Stop();
             RandomizedQuestions.Clear();
-            
+
+            var Result = MessageBox.Show($"You scored a'{_correctAnswersCount}' of a total of {TotalQuestions}.\nTry again?", $"Restart ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (Result == MessageBoxResult.Yes)
+            {
+                //Load StartQuiz
+                _correctAnswersCount = 0;
+                MessageBox.Show($"Restarting {_mainWindowViewModel!.ActivePack}");
+                StartQuiz(_mainWindowViewModel!.ActivePack!.Questions, _mainWindowViewModel!.ActivePack.TimeLimitInSeconds);
+            }
+            else if (Result == MessageBoxResult.No)
+            {
+                _correctAnswersCount = 0;
+                _mainWindowViewModel!.ShowConfigurationView(this);
+            }
+
         }
     }
 }
