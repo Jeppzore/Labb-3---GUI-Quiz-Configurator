@@ -26,13 +26,13 @@
                    Text="{Binding PlayerViewModel.TimePerQuestion}" />
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-            
+
+
             <TextBlock Grid.Row="1"
-               Text="{Binding PlayerViewModel.CurrentQuestion.Query, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-               FontSize="20"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center">
+                       Text="{Binding PlayerViewModel.CurrentQuestion.Query, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
             </TextBlock>
 
             <TextBlock Grid.Row="1" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -45,55 +45,56 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
 
             <Button Content="{Binding PlayerViewModel.Answer1, Mode=OneWay}"
-                Command="{Binding PlayerViewModel.SelectedAnswer}"
-                CommandParameter="{Binding PlayerViewModel.Answer1}"
-                Grid.Row="2"
-                Margin="20"
-                Width="150"
-                Height="60"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <Button.Background>
-                    <MultiBinding Converter="{StaticResource DictionaryConverter}">
-                        <Binding Path="PlayerViewModel.ButtonBackgrounds"/>
-                        <Binding Path="PlayerViewModel.Answer1"/>
-                    </MultiBinding>
-                </Button.Background>
-            </Button>
+                    Command="{Binding PlayerViewModel.SelectedAnswer}"
+                    CommandParameter="{Binding PlayerViewModel.Answer1}"
+                    Grid.Row="2"
+                    Margin="20"
+                    Width="150"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding PlayerViewModel.AreButtonsEnabled}"
+                    Background="{Binding PlayerViewModel.Answer1Background}" />
 
-        <Button Content="{Binding PlayerViewModel.Answer2, Mode=OneWay}"
-                Command="{Binding PlayerViewModel.SelectedAnswer}"
-                CommandParameter="{Binding PlayerViewModel.Answer2}"
-                Grid.Row="2"
-                Margin="20"
-                Width="150"
-                Height="60"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+            <Button Content="{Binding PlayerViewModel.Answer2, Mode=OneWay}"
+                    Command="{Binding PlayerViewModel.SelectedAnswer}"
+                    CommandParameter="{Binding PlayerViewModel.Answer2}"
+                    Grid.Row="2"
+                    Margin="20"
+                    Width="150"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding PlayerViewModel.AreButtonsEnabled}"
+                    Background="{Binding PlayerViewModel.Answer2Background}" />
 
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
 
-        <Button Content="{Binding PlayerViewModel.Answer3, Mode=OneWay}"
-                Command="{Binding PlayerViewModel.SelectedAnswer}"
-                CommandParameter="{Binding PlayerViewModel.Answer3}"                                
-                Grid.Row="2"
-                Margin="20"
-                Width="150"
-                Height="60"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+            <Button Content="{Binding PlayerViewModel.Answer3, Mode=OneWay}"
+                    Command="{Binding PlayerViewModel.SelectedAnswer}"
+                    CommandParameter="{Binding PlayerViewModel.Answer3}"                                
+                    Grid.Row="2"
+                    Margin="20"
+                    Width="150"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding PlayerViewModel.AreButtonsEnabled}"
+                    Background="{Binding PlayerViewModel.Answer3Background}" />
 
-        <Button Content="{Binding PlayerViewModel.Answer4, Mode=OneWay}"
-                Command="{Binding PlayerViewModel.SelectedAnswer}"
-                CommandParameter="{Binding PlayerViewModel.Answer4}"
-                Grid.Row="2"
-                Margin="20"
-                Width="150"
-                Height="60"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+            <Button Content="{Binding PlayerViewModel.Answer4, Mode=OneWay}"
+                    Command="{Binding PlayerViewModel.SelectedAnswer}"
+                    CommandParameter="{Binding PlayerViewModel.Answer4}"
+                    Grid.Row="2"
+                    Margin="20"
+                    Width="150"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding PlayerViewModel.AreButtonsEnabled}"
+                    Background="{Binding PlayerViewModel.Answer4Background}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -106,6 +106,69 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
+        private bool _areButtonsEnabled = true;
+        public bool AreButtonsEnabled
+        {
+            get => _areButtonsEnabled;
+            set
+            {
+                _areButtonsEnabled = value;
+                RaisePropertyChanged(nameof(AreButtonsEnabled));
+            }
+        }
+
+        private bool _isAnsweringEnabled = true;
+        public bool IsAnsweringEnabled
+        {
+            get => _isAnsweringEnabled;
+            set 
+            { 
+                _isAnsweringEnabled = value; 
+                RaisePropertyChanged(nameof(IsAnsweringEnabled)); 
+            }
+        }
+
+        private bool _isAnswerSelected;
+        public bool IsAnswerSelected
+        {
+            get => _isAnswerSelected;
+            set
+            {
+                _isAnswerSelected = value;
+                RaisePropertyChanged(nameof(IsAnswerSelected));
+            }
+        }
+
+        // *** FÖRSÖK ATT LÖSA VARJE INDIVIDUELL KNAPPS FÄRG *** //
+
+        private Brush _answer1Background;
+        public Brush Answer1Background
+        {
+            get => _answer1Background;
+            set { _answer1Background = value; RaisePropertyChanged(nameof(Answer1Background)); }
+        }
+
+        private Brush _answer2Background;
+        public Brush Answer2Background
+        {
+            get => _answer2Background;
+            set { _answer2Background = value; RaisePropertyChanged(nameof(Answer2Background)); }
+        }
+
+        private Brush _answer3Background;
+        public Brush Answer3Background
+        {
+            get => _answer3Background;
+            set { _answer3Background = value; RaisePropertyChanged(nameof(Answer3Background)); }
+        }
+
+        private Brush _answer4Background;
+        public Brush Answer4Background
+        {
+            get => _answer4Background;
+            set { _answer4Background = value; RaisePropertyChanged(nameof(Answer4Background)); }
+        }
+
         public string Answer1 => _currentAnswers?.Length > 0 ? _currentAnswers[0] : string.Empty;
         public string Answer2 => _currentAnswers?.Length > 1 ? _currentAnswers[1] : string.Empty;
         public string Answer3 => _currentAnswers?.Length > 2 ? _currentAnswers[2] : string.Empty;
@@ -136,25 +199,68 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private async void OnSelectedAnswer(string selectedAnswer)
         {
+
+            if (!IsAnsweringEnabled) return;
+
+            //AreButtonsEnabled = false;
+            //IsAnswerSelected = true;
+            IsAnsweringEnabled = false;
+            SelectedAnswer.RaiseCanExecuteChanged();
+
+            //TODO: Possible to mark the correct
+            //answer green when failing to answer in time?
+            if (selectedAnswer == "No answer")
+            {
+                MessageBox.Show("Time ran out!");
+            }
+
             if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
             {
                 _correctAnswersCount++;
-                ButtonBackgrounds[selectedAnswer] = Brushes.Green;
-                RaisePropertyChanged(nameof(ButtonBackgrounds));
-                _timer.Stop();
-                await Task.Delay(1500);
-                _timer.Start();
-                LoadNextQuestion();
+
+                //ButtonBackgrounds[selectedAnswer] = Brushes.Green;
+                //RaisePropertyChanged(nameof(ButtonBackgrounds));          
+                UpdateAnswerBackground(selectedAnswer, Brushes.Green);
             }
             else
             {
-                ButtonBackgrounds[selectedAnswer] = Brushes.Red;
-                RaisePropertyChanged(nameof(ButtonBackgrounds));
-                _timer.Stop();
-                await Task.Delay(1500);
-                _timer.Start();
-                LoadNextQuestion();
+                //ButtonBackgrounds[selectedAnswer] = Brushes.Red;
+                //RaisePropertyChanged(nameof(ButtonBackgrounds));
+                UpdateAnswerBackground(selectedAnswer, Brushes.Red);
+
             }
+
+            _timer.Stop();
+            await Task.Delay(1200);
+
+            // Reset Background colors and re-active the selectedAnswer-buttons after Task.Delay
+            //AreButtonsEnabled = true;
+            ResetAnswerBackgrounds();
+            //IsAnswerSelected = false;
+            //ButtonBackgrounds.Clear();
+
+            _timer.Start();
+            LoadNextQuestion();
+
+            IsAnsweringEnabled = true;
+            SelectedAnswer.RaiseCanExecuteChanged();
+        }
+
+
+        private void UpdateAnswerBackground(string selectedAnswer, Brush color)
+        {
+            if (selectedAnswer == Answer1) Answer1Background = color;
+            else if (selectedAnswer == Answer2) Answer2Background = color;
+            else if (selectedAnswer == Answer3) Answer3Background = color;
+            else if (selectedAnswer == Answer4) Answer4Background = color;
+        }
+
+        private void ResetAnswerBackgrounds()
+        {
+            Answer1Background = Brushes.Transparent;
+            Answer2Background = Brushes.Transparent;
+            Answer3Background = Brushes.Transparent;
+            Answer4Background = Brushes.Transparent;
         }
 
         private void QuestionTimer(object? sender, EventArgs e)
@@ -165,7 +271,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
             else
             {
-                LoadNextQuestion();
+                OnSelectedAnswer("No answer");
+                //LoadNextQuestion();
                 TimePerQuestion = _mainWindowViewModel!.ActivePack!.TimeLimitInSeconds;
             }
         }

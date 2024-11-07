@@ -17,9 +17,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public PlayerViewModel PlayerViewModel { get; }
         public LocalDataService LocalDataService { get; }
 
-
-        //public ICommand ShowPackDialogCommand { get; }
-
         public DelegateCommand ShowPlayerCommand { get; }
         public DelegateCommand ShowConfigurationCommand { get; }
 
@@ -27,8 +24,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public DelegateCommand SelectQuestionPackCommand { get; }
         public DelegateCommand RemoveQuestionPackCommand { get; }
         public DelegateCommand AddQuestionPackCommand { get; }
-
-        public DelegateCommand TestCommand { get; }
 
         private bool _isPlayerViewVisible;
         private bool _isConfigurationViewVisible;
@@ -89,11 +84,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
             SelectQuestionPackCommand = new DelegateCommand(SelectQuestionPack);
             RemoveQuestionPackCommand = new DelegateCommand(RemoveQuestionPack);
-
-            TestCommand = new DelegateCommand(Test);
         }
-
-
 
         private void RemoveQuestionPack(object obj)
         {
@@ -132,24 +123,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        private void Test(object obj)
-        {
-            MessageBox.Show("Testing");
-        }
-
-        //private void UpdateActivePack()
-        //{
-        //    if (Packs.Contains(ActivePack))
-        //    {
-        //        int index = Packs.IndexOf(ActivePack);
-        //        Packs[index] = ActivePack;
-        //    }
-        //    else
-        //    {
-        //        Packs.Add(ActivePack);
-        //    }
-        //}
-
         private void AddQuestionPack(object obj)
         {
             NewPack = new QuestionPackViewModel(new QuestionPack());
@@ -165,7 +138,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             _newPackDialog.Close();    
         }
 
-
         private bool CanAddQuestionPack(object? arg)
         {
             return true;
@@ -176,13 +148,12 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public void ShowPlayerView(object? obj)
         {
-            if (ActivePack != null)
+            if (ActivePack != null && ActivePack.Questions.Count > 0)
             {
                 var Result = MessageBox.Show($"Do you want to Play: '{ActivePack}'?", $"Play: '{ActivePack}'?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (Result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show($"Good luck!");
                     PlayerViewModel.StartQuiz(ActivePack.Questions, ActivePack.TimeLimitInSeconds);
                 }
                 else if (Result == MessageBoxResult.No)
@@ -192,7 +163,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
                 IsPlayerViewVisible = true;
                 IsConfigurationViewVisible = false;
-            }        
+            }
+
         }
         public void ShowConfigurationView(object? obj)
         {
