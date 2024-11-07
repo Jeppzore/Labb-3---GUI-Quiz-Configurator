@@ -14,7 +14,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public ConfigurationViewModel ConfigurationViewModel { get; }
         public PlayerViewModel PlayerViewModel { get; }
-        public LocalDataService LocalDataService { get; }
+        public QuizManagerService LocalDataService { get; }
 
         public DelegateCommand ShowPlayerCommand { get; }
         public DelegateCommand ShowConfigurationCommand { get; }
@@ -47,7 +47,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 RaisePropertyChanged(nameof(IsConfigurationViewVisible));
             }
         }
-
 
         private QuestionPackViewModel? _activePack;
 
@@ -88,31 +87,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             ExitCommand = new DelegateCommand(Exit);
         }
-
-        private void Exit(object obj)
-        {
-            var mainWindow = Application.Current.MainWindow;
-            mainWindow?.Close();
-        }
-
-        private void ShowFullscreen(object obj)
-        {
-            var mainWindow = Application.Current.MainWindow;
-
-            if (mainWindow.WindowState != WindowState.Maximized || mainWindow.WindowStyle != WindowStyle.None)
-            {
-                // Fullscreen
-                mainWindow.WindowStyle = WindowStyle.None;
-                mainWindow.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                // Reset to normal screen
-                mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
-                mainWindow.WindowState = WindowState.Normal;
-            }
-        }
-
+     
         private void RemoveQuestionPack(object obj)
         {
             if (ActivePack != null)
@@ -188,12 +163,34 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 IsPlayerViewVisible = true;
                 IsConfigurationViewVisible = false;
             }
-
         }
         public void ShowConfigurationView(object? obj)
         {
             IsPlayerViewVisible = false;
             IsConfigurationViewVisible = true;
+        }
+
+        private void ShowFullscreen(object obj)
+        {
+            var mainWindow = Application.Current.MainWindow;
+
+            if (mainWindow.WindowState != WindowState.Maximized || mainWindow.WindowStyle != WindowStyle.None)
+            {
+                // Fullscreen
+                mainWindow.WindowStyle = WindowStyle.None;
+                mainWindow.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                // Reset to normal screen
+                mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                mainWindow.WindowState = WindowState.Normal;
+            }
+        }
+        private void Exit(object obj)
+        {
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow?.Close();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
     internal class ConfigurationViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? _mainWindowViewModel;
-        private readonly LocalDataService? _localDataService;
+        private readonly QuizManagerService? _quizManagerService;
 
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
@@ -59,20 +59,20 @@ namespace Labb_3___GUI_Quiz.ViewModel
         //    }
         //}
 
-        public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
+        public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, QuizManagerService? quizManagerService)
         {
             this._mainWindowViewModel = mainWindowViewModel;
-            _localDataService = localDataService ?? new LocalDataService();
+            //_quizManagerService = quizManagerService ?? new QuizManagerService();
 
-            var loadedQuestions = _localDataService?.LoadQuestions();
+            //var loadedQuestions = _quizManagerService?.LoadQuestions();
 
-            if (loadedQuestions != null)
-            {
-                foreach (var question in loadedQuestions)
-                {
-                    ActivePack?.Questions.Add(question);
-                }
-            }
+            //if (loadedQuestions != null)
+            //{
+            //    foreach (var question in loadedQuestions)
+            //    {
+            //        ActivePack?.Questions.Add(question);
+            //    }
+            //}
 
             AddQuestion = new DelegateCommand(AddQuestionHandler); //(CanAddQuestion)
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
@@ -90,7 +90,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             {
                 ActivePack?.Questions.Remove(SelectedQuestion);
                 SelectedQuestion = null;
-                _localDataService?.SaveQuestions(ActivePack?.Questions);
+                //_quizManagerService?.SaveQuestions(ActivePack?.Questions);
             }
         }
         private bool CanRemoveQuestion(object? obj) => SelectedQuestion != null;
@@ -102,14 +102,14 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 var newQuestion = new Question("<New Question>", "", "", "", "");
                 ActivePack?.Questions.Add(newQuestion);
                 SelectedQuestion = newQuestion;
-                _localDataService?.SaveQuestions(ActivePack?.Questions!);
+                //_quizManagerService?.SaveQuestions(ActivePack?.Questions!);
             }
         }
         public void SaveQuestions()
         {
             if (ActivePack?.Questions != null)
             {
-                _localDataService?.SaveQuestions(ActivePack.Questions);
+                //_quizManagerService?.SaveQuestions(ActivePack.Questions);
             }
         }
 

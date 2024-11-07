@@ -9,14 +9,22 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding AddQuestionPackCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding DataContext.SelectQuestionPackCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+    </UserControl.InputBindings>
+
     <Grid>
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem 
-                    Header="_New Question Pack" Icon="{fa:Icon folderplus}"
+                    Header="_New Question Pack" Icon="{fa:Icon folderplus}"    
+                    InputGestureText="Ctrl+N"
                     Command="{Binding AddQuestionPackCommand}"/>
 
                 <MenuItem Header="_Select Question Pack" 
+                          InputGestureText="Ctrl+S"
                           ItemsSource="{Binding Packs}"
                           Icon="{fa:Icon folderopen}">
                     <MenuItem.ItemTemplate>
@@ -38,6 +46,7 @@
 
                 <MenuItem 
                     Header="_Delete Question Pack"
+                    InputGestureText="Ctrl+D"
                     Icon="{fa:Icon folderminus}"
                     Command="{Binding RemoveQuestionPackCommand}"
                     />
@@ -46,6 +55,7 @@
                 
                 <MenuItem 
                     Header="_Import Questions"
+                    InputGestureText="Ctrl+I"
                     Icon="{fa:Icon fileimport}"/>
                     
                 <Separator />
@@ -69,7 +79,7 @@
                           Command="{Binding RemoveQuestion}"/>
 
                 <MenuItem Header="_Pack Options"
-                          InputGestureText="Ctrl+P"
+                          InputGestureText="Ctrl+O"
                           Icon="{fa:Icon gear}"
                           Command="{Binding ShowOptionDialog}"/>
 
@@ -78,17 +88,20 @@
             <MenuItem Header="_View">
                 <MenuItem 
                     Header="_Play"
+                    InputGestureText="Ctrl+P"
                     Icon="{fa:Icon play}"
                     Command="{Binding ShowPlayerCommand}"/>
 
                 <MenuItem 
                     Header="_Edit"
+                    InputGestureText="Ctrl+E"
                     Icon="{fa:Icon pentosquare}"
                     Command="{Binding ShowConfigurationCommand}">
                 </MenuItem>
 
                 <MenuItem                
                     Header="_Fullscreen"
+                    InputGestureText="Ctrl+F"
                     Icon="{fa:Icon expand}"
                     Command="{Binding ShowFullScreenCommand}"/>
             </MenuItem>

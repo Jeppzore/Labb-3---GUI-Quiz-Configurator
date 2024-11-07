@@ -15,6 +15,10 @@
         <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     </UserControl.Resources>
 
+    <UserControl.InputBindings>
+        <KeyBinding Key="Delete" Command="{Binding ConfigurationViewModel.RemoveQuestion}" />
+    </UserControl.InputBindings>
+
     <Grid DataContext="{Binding ConfigurationViewModel}">
 
         <Grid.ColumnDefinitions>
@@ -42,8 +46,7 @@
                 <fa:IconImage Icon="Gear" Width="10" Height="10" />
                 
             </Button>
-            <Button x:Name="buttonAddQuestion"
-                    Command="{Binding AddQuestion}"
+            <Button Command="{Binding AddQuestion}"
                     Width="15"
                     Height="15"
                     HorizontalAlignment="Center"
@@ -76,7 +79,8 @@
                  Visibility="Visible"
                  HorizontalAlignment="Left"
                  Width="380"
-                 SelectionMode="Extended">
+                 SelectionMode="Extended"
+                 ToolTip="'Delete' to remove selected question">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel x:Name="stackpanelLeft" >
