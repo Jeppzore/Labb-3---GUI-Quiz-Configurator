@@ -49,12 +49,11 @@
                     Icon="{fa:Icon fileimport}"/>
                     
                 <Separator />
-                
+
                 <MenuItem 
-                    x:Name="fileMenuExit"
                     Header="E_xit"
                     Icon="{fa:Icon dooropen}"
-                    Click="fileMenuExit_Click"/>
+                    Command="{Binding ExitCommand}" />
             </MenuItem>
 
             <MenuItem Header="_Edit" DataContext="{Binding ConfigurationViewModel}">
@@ -88,11 +87,10 @@
                     Command="{Binding ShowConfigurationCommand}">
                 </MenuItem>
 
-                <MenuItem 
-                    x:Name="viewMenuFullscreen"                    
+                <MenuItem                
                     Header="_Fullscreen"
                     Icon="{fa:Icon expand}"
-                    Click="viewMenuFullscreen_Click"/>
+                    Command="{Binding ShowFullScreenCommand}"/>
             </MenuItem>
         </Menu>
     </Grid>

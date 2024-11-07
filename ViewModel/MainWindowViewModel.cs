@@ -18,10 +18,11 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public DelegateCommand ShowPlayerCommand { get; }
         public DelegateCommand ShowConfigurationCommand { get; }
-
+        public DelegateCommand ShowFullScreenCommand { get; }
         public DelegateCommand ConfirmAndCreateQuestionPackCommand { get; }
         public DelegateCommand SelectQuestionPackCommand { get; }
         public DelegateCommand RemoveQuestionPackCommand { get; }
+        public DelegateCommand ExitCommand { get; }
         public DelegateCommand AddQuestionPackCommand { get; }
 
         private bool _isPlayerViewVisible;
@@ -78,11 +79,38 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             ShowPlayerCommand = new DelegateCommand(ShowPlayerView);
             ShowConfigurationCommand = new DelegateCommand(ShowConfigurationView);
+            ShowFullScreenCommand = new DelegateCommand(ShowFullscreen);
 
             AddQuestionPackCommand = new DelegateCommand(AddQuestionPack, CanAddQuestionPack);
             ConfirmAndCreateQuestionPackCommand = new DelegateCommand(CreateQuestionPack);
             SelectQuestionPackCommand = new DelegateCommand(SelectQuestionPack);
             RemoveQuestionPackCommand = new DelegateCommand(RemoveQuestionPack);
+
+            ExitCommand = new DelegateCommand(Exit);
+        }
+
+        private void Exit(object obj)
+        {
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow?.Close();
+        }
+
+        private void ShowFullscreen(object obj)
+        {
+            var mainWindow = Application.Current.MainWindow;
+
+            if (mainWindow.WindowState != WindowState.Maximized || mainWindow.WindowStyle != WindowStyle.None)
+            {
+                // Fullscreen
+                mainWindow.WindowStyle = WindowStyle.None;
+                mainWindow.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                // Reset to normal screen
+                mainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+                mainWindow.WindowState = WindowState.Normal;
+            }
         }
 
         private void RemoveQuestionPack(object obj)
