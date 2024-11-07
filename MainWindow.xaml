@@ -15,7 +15,6 @@
         mc:Ignorable="d"
         Title="Quiz Configurator" Height="450" Width="800" MinHeight="450" MinWidth="800">
 
-
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
@@ -26,8 +25,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <!--Views-->
-   
         <views:MenuView Grid.Row="0" />
 
         <views:ConfigurationView Grid.Row="1"
@@ -37,6 +34,5 @@
         <views:PlayerView Grid.Row="1"
             Visibility="{Binding IsPlayerViewVisible,
             Converter={StaticResource BooleanToVisibilityConverter}}" />
-
     </Grid>
 </Window>

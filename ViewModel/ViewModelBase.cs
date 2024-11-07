@@ -1,7 +1,5 @@
-﻿using Labb_3___GUI_Quiz.Dialogs;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {

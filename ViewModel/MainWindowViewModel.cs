@@ -5,7 +5,6 @@ using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
@@ -74,7 +73,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
             PlayerViewModel = new PlayerViewModel(this);
 
-            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));      
+            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
             Packs.Add(ActivePack);
 
             ShowPlayerCommand = new DelegateCommand(ShowPlayerView);
@@ -135,16 +134,13 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             Packs.Add(NewPack!);
             ActivePack = NewPack;
-            _newPackDialog.Close();    
+            _newPackDialog.Close();
         }
 
         private bool CanAddQuestionPack(object? arg)
         {
             return true;
         }
-
-
-        // Methods to show the correct view
 
         public void ShowPlayerView(object? obj)
         {

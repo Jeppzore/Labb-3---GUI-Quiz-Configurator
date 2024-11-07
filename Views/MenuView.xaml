@@ -9,7 +9,6 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
     <Grid>
         <Menu>
             <MenuItem Header="_File">
@@ -58,7 +57,6 @@
                     Click="fileMenuExit_Click"/>
             </MenuItem>
 
-
             <MenuItem Header="_Edit" DataContext="{Binding ConfigurationViewModel}">
 
                 <MenuItem Header="_Add Question"
@@ -96,54 +94,6 @@
                     Icon="{fa:Icon expand}"
                     Click="viewMenuFullscreen_Click"/>
             </MenuItem>
-
-
         </Menu>
     </Grid>
 </UserControl>
-
-<!--<MenuItem Header="_File">
-    <MenuItem x:Name="fileMenuQuestionPack"
-                  Header="New Question Pack"/>
-
-    <MenuItem Header="Select Question Pack">
-        <MenuItem x:Name="fileMenuSelectQuestionPack"
-                      Header="Available Question Pack">
-        </MenuItem>
-    </MenuItem>
-
-    <MenuItem x:Name="fileMenuDeleteQuestionPack"
-                  Header="Delete Question Pack"/>
-    <Separator />
-    <MenuItem x:Name="fileMenuImportQuestions"
-                  Header="Import Questions"/>
-    <Separator />
-    <MenuItem x:Name="fileMenuExit"
-                  Header="Exit"/>
-</MenuItem>
-
-<MenuItem Header="_Edit">
-    <MenuItem x:Name="editMenuAddQuestion"
-                  Header="Add Question"/>
-
-    <MenuItem x:Name="editMenuRemoveQuestion"
-                  Header="Remove Question">
-    </MenuItem>
-
-    <MenuItem x:Name="editMenuPackOptions"
-                  Header="Pack Options"/>
-</MenuItem>
-
-<MenuItem Header="_View">
-    <MenuItem x:Name="viewMenuPlay"
-                  Header="Play"/>
-
-    <MenuItem x:Name="viewMenuEdit"
-                  Header="Edit">
-    </MenuItem>
-
-    <MenuItem x:Name="viewMenuFullscreen"
-                  Header="Fullscreen"/>
-</MenuItem>
-
-</Menu>-->

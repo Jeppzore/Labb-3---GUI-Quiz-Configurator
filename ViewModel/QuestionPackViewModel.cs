@@ -5,12 +5,9 @@ namespace Labb_3___GUI_Quiz.ViewModel
 {
     internal class QuestionPackViewModel : ViewModelBase
     {
-        // Fields
         private readonly QuestionPack model;
 
-        // Properties
         public ObservableCollection<Question> Questions { get; }
-
 
         public string Name
         {
@@ -47,7 +44,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             this.model = model;
             this.Questions = new ObservableCollection<Question>(model.Questions);
         }
-
         public override string ToString()
         {
             return $"{Name} ({Difficulty}) - {TimeLimitInSeconds} seconds";

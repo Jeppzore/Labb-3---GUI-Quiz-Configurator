@@ -88,23 +88,11 @@
 
         </ListBox>
 
-        <!--<ListBox.ContextMenu>
-            <ContextMenu>
-                <MenuItem x:Name="contextAdd"
-                      Header="Add Question"/>
-
-                <MenuItem x:Name="contextRemove"
-                      Header="Remove Question"
-                      IsEnabled="False"/>
-            </ContextMenu>
-        </ListBox.ContextMenu>-->
-
-
         <StackPanel x:Name="stackpanelRight"
                     Visibility="{Binding SelectedQuestion, Converter={StaticResource NullToVisibilityConverter}}"                   
                     Grid.Column="1"
                     Margin="20,35,10,12">
-            
+
             <TextBlock Margin="6">
         <Bold>
             Question:
@@ -157,6 +145,5 @@
             </TextBlock>
 
         </StackPanel>
-
     </Grid>
 </UserControl>

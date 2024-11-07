@@ -4,7 +4,6 @@ using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
@@ -13,7 +12,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         private readonly MainWindowViewModel? _mainWindowViewModel;
         private readonly LocalDataService? _localDataService;
 
-        // Command Properties
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
         public DelegateCommand ShowOptionDialog { get; }
@@ -21,7 +19,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public DelegateCommand PlayerAnswerCorrect { get; }
         public DelegateCommand PlayerAnswerWrong { get; }
 
-        // Question Properties
         public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
 
         private Question? _selectedQuestion;
@@ -35,7 +32,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 {
                     _selectedQuestion = value;
                     RaisePropertyChanged();
-                    //ShuffleAnswers();
                     RemoveQuestion.RaiseCanExecuteChanged();
                 }
             }
@@ -63,8 +59,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         //    }
         //}
 
-
-
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, LocalDataService? localDataService)
         {
             this._mainWindowViewModel = mainWindowViewModel;
@@ -83,21 +77,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             AddQuestion = new DelegateCommand(AddQuestionHandler); //(CanAddQuestion)
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
             ShowOptionDialog = new DelegateCommand(ShowPackOptionsDialog);
-
-            PlayerAnswerCorrect = new DelegateCommand(CorrectAnswer);
-            PlayerAnswerWrong = new DelegateCommand(WrongAnswer);
         }
-
-        private void WrongAnswer(object obj)
-        {
-            MessageBox.Show("Wrong!");
-        }
-
-        private void CorrectAnswer(object obj)
-        {
-            MessageBox.Show("Correct!");
-        }
-
         public void ShowPackOptionsDialog(object? obj)
         {
             var packOptionsDialogWindow = new PackOptionsDialog(_mainWindowViewModel!);
@@ -114,19 +94,16 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
         private bool CanRemoveQuestion(object? obj) => SelectedQuestion != null;
-        //private bool CanAddQuestion(object? obj) => SelectedQuestionPack != null;
-
 
         private void AddQuestionHandler(object? obj)
         {
-            if (ActivePack  != null)
+            if (ActivePack != null)
             {
                 var newQuestion = new Question("<New Question>", "", "", "", "");
                 ActivePack?.Questions.Add(newQuestion);
                 SelectedQuestion = newQuestion;
-                _localDataService?.SaveQuestions(ActivePack?.Questions);
+                _localDataService?.SaveQuestions(ActivePack?.Questions!);
             }
-
         }
         public void SaveQuestions()
         {

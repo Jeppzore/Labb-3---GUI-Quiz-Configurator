@@ -1,11 +1,9 @@
 ﻿using Labb_3___GUI_Quiz.Command;
 using Labb_3___GUI_Quiz.Model;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
@@ -79,7 +77,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        public Question ?CurrentQuestion
+        public Question? CurrentQuestion
         {
             get => _currentQuestion;
             set
@@ -121,10 +119,10 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public bool IsAnsweringEnabled
         {
             get => _isAnsweringEnabled;
-            set 
-            { 
-                _isAnsweringEnabled = value; 
-                RaisePropertyChanged(nameof(IsAnsweringEnabled)); 
+            set
+            {
+                _isAnsweringEnabled = value;
+                RaisePropertyChanged(nameof(IsAnsweringEnabled));
             }
         }
 
@@ -199,34 +197,18 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private async void OnSelectedAnswer(string selectedAnswer)
         {
-
             if (!IsAnsweringEnabled) return;
-
-            //AreButtonsEnabled = false;
-            //IsAnswerSelected = true;
             IsAnsweringEnabled = false;
-            SelectedAnswer.RaiseCanExecuteChanged();
 
-            //TODO: Possible to mark the correct
-            //answer green when failing to answer in time?
-            //if (selectedAnswer == CurrentQuestion!.IncorrectAnswers![1])
-            //{
-            //    UpdateAnswerBackground(selectedAnswer, Brushes.Red);
-            //    //MessageBox.Show("Time ran out!");
-            //}
+            SelectedAnswer.RaiseCanExecuteChanged();
 
             if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
             {
                 _correctAnswersCount++;
-
-                //ButtonBackgrounds[selectedAnswer] = Brushes.Green;
-                //RaisePropertyChanged(nameof(ButtonBackgrounds));          
                 UpdateAnswerBackground(selectedAnswer, Brushes.Green);
             }
             else
             {
-                //ButtonBackgrounds[selectedAnswer] = Brushes.Red;
-                //RaisePropertyChanged(nameof(ButtonBackgrounds));
                 UpdateAnswerBackground(selectedAnswer, Brushes.Red);
                 SelectedAnswer.RaiseCanExecuteChanged();
                 await Task.Delay(300);
@@ -235,14 +217,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             _timer.Stop();
             await Task.Delay(1500);
-
-            // Reset Background colors and re-active the selectedAnswer-buttons after Task.Delay
-            //AreButtonsEnabled = true;
-
-            //ResetAnswerBackgrounds();
-
-            //IsAnswerSelected = false;
-            //ButtonBackgrounds.Clear();
 
             SelectedAnswer.RaiseCanExecuteChanged();
             _timer.Start();
@@ -278,7 +252,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             LoadNextQuestion();
         }
 
-
         private void UpdateAnswerBackground(string selectedAnswer, Brush color)
         {
             if (selectedAnswer == Answer1) Answer1Background = color;
@@ -303,9 +276,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
             else
             {
-                //OnSelectedAnswer("No answer");
                 OnSelectedAnswerTimeout(CurrentQuestion!.CorrectAnswer!);
-                //LoadNextQuestion();
                 TimePerQuestion = _mainWindowViewModel!.ActivePack!.TimeLimitInSeconds;
             }
         }
@@ -392,7 +363,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 _correctAnswersCount = 0;
                 _mainWindowViewModel!.ShowConfigurationView(this);
             }
-
         }
     }
 }

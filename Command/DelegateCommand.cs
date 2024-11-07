@@ -19,11 +19,6 @@ namespace Labb_3___GUI_Quiz.Command
             this.canExecute = canExecute ?? (_ => true);
         }
 
-        //public DelegateCommand(Action showPlayerView)
-        //{
-        //    this.showPlayerView = showPlayerView;
-        //}
-
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
@@ -34,7 +29,6 @@ namespace Labb_3___GUI_Quiz.Command
             return canExecute is null ? true : canExecute(parameter);
         }
 
-        // Körs bara om CanExecute == true
         public void Execute(object? parameter)
         {
             execute(parameter!);

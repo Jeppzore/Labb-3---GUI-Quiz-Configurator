@@ -1,7 +1,4 @@
-﻿using Labb_3___GUI_Quiz.Model;
-using Labb_3___GUI_Quiz.ViewModel;
-
-using System.Windows;
+﻿using System.Windows;
 
 namespace Labb_3___GUI_Quiz.Dialogs
 {
@@ -15,7 +12,7 @@ namespace Labb_3___GUI_Quiz.Dialogs
             InitializeComponent();
             //DataContext = new QuestionPack("New Question Pack", Difficulty.Medium, 30);
             DataContext = (App.Current.MainWindow as MainWindow).DataContext;
-        }   
+        }
 
         private void createPackButtonCancel_Click(object sender, RoutedEventArgs e)
         {

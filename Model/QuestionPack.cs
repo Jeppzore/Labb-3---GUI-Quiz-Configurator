@@ -6,7 +6,7 @@ namespace Labb_3___GUI_Quiz.Model
 
     internal class QuestionPack : INotifyPropertyChanged
     {
-        private string ?_name;
+        private string? _name;
         private Difficulty _difficulty;
         private int _timeLimitInSeconds;
 
