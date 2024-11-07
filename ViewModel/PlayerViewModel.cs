@@ -139,7 +139,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
         }
 
-        // *** FÖRSÖK ATT LÖSA VARJE INDIVIDUELL KNAPPS FÄRG *** //
+        // Keeps track of every buttons respective color
 
         private Brush _answer1Background;
         public Brush Answer1Background
@@ -209,10 +209,11 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
             //TODO: Possible to mark the correct
             //answer green when failing to answer in time?
-            if (selectedAnswer == "No answer")
-            {
-                MessageBox.Show("Time ran out!");
-            }
+            //if (selectedAnswer == CurrentQuestion!.IncorrectAnswers![1])
+            //{
+            //    UpdateAnswerBackground(selectedAnswer, Brushes.Red);
+            //    //MessageBox.Show("Time ran out!");
+            //}
 
             if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
             {
@@ -227,23 +228,54 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 //ButtonBackgrounds[selectedAnswer] = Brushes.Red;
                 //RaisePropertyChanged(nameof(ButtonBackgrounds));
                 UpdateAnswerBackground(selectedAnswer, Brushes.Red);
-
+                SelectedAnswer.RaiseCanExecuteChanged();
+                await Task.Delay(300);
+                UpdateAnswerBackground(CurrentQuestion!.CorrectAnswer!, Brushes.Yellow);
             }
 
             _timer.Stop();
-            await Task.Delay(1200);
+            await Task.Delay(1500);
 
             // Reset Background colors and re-active the selectedAnswer-buttons after Task.Delay
             //AreButtonsEnabled = true;
-            ResetAnswerBackgrounds();
+
+            //ResetAnswerBackgrounds();
+
             //IsAnswerSelected = false;
             //ButtonBackgrounds.Clear();
 
+            SelectedAnswer.RaiseCanExecuteChanged();
             _timer.Start();
-            LoadNextQuestion();
 
             IsAnsweringEnabled = true;
+            LoadNextQuestion();
+        }
+
+        // When player fails to answer in time
+        private async void OnSelectedAnswerTimeout(string selectedAnswer)
+        {
+
+            if (!IsAnsweringEnabled) return;
+            IsAnsweringEnabled = false;
             SelectedAnswer.RaiseCanExecuteChanged();
+
+            // Shows the correct answer while not giving the player any score
+
+            if (selectedAnswer == CurrentQuestion!.CorrectAnswer)
+            {
+                UpdateAnswerBackground(selectedAnswer, Brushes.Yellow);
+            }
+
+            _timer.Stop();
+            await Task.Delay(1500);
+
+            ResetAnswerBackgrounds();
+
+            SelectedAnswer.RaiseCanExecuteChanged();
+            _timer.Start();
+
+            IsAnsweringEnabled = true;
+            LoadNextQuestion();
         }
 
 
@@ -271,7 +303,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             }
             else
             {
-                OnSelectedAnswer("No answer");
+                //OnSelectedAnswer("No answer");
+                OnSelectedAnswerTimeout(CurrentQuestion!.CorrectAnswer!);
                 //LoadNextQuestion();
                 TimePerQuestion = _mainWindowViewModel!.ActivePack!.TimeLimitInSeconds;
             }
@@ -299,6 +332,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private void LoadNextQuestion()
         {
+            ResetAnswerBackgrounds();
+
             if (RandomizedQuestions.Count > 0)
             {
                 CurrentQuestion = RandomizedQuestions[0];
@@ -329,7 +364,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             return shuffledAnswers!;
         }
 
-        //TODO: LoadQUestion should call on this method after each loaded question to reset the colors
         public void ResetButtonBackgrounds()
         {
             foreach (var key in ButtonBackgrounds.Keys.ToList())
@@ -344,7 +378,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
             _timer.Stop();
             RandomizedQuestions.Clear();
 
-            var Result = MessageBox.Show($"You scored a'{_correctAnswersCount}' of a total of {TotalQuestions}.\nTry again?", $"Restart ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var Result = MessageBox.Show($"You scored a '{_correctAnswersCount}' of a total of {TotalQuestions}.\nTry again?", $"Restart ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (Result == MessageBoxResult.Yes)
             {
