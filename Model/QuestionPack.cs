@@ -51,7 +51,6 @@ namespace Labb_3___GUI_Quiz.Model
             }
         }
 
-        // When creating a new objekt of QuestionPack, the default value of difficulty and timelimit are set.
         public QuestionPack(string name = "New Pack", Difficulty difficulty = Difficulty.Medium, int timeLimitInSeconds = 30)
         {
             Name = name;

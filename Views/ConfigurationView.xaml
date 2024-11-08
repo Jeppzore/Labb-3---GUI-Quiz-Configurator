@@ -105,7 +105,6 @@
 
             <TextBox x:Name="textboxQuestion"
                      Text="{Binding SelectedQuestion.Query, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     LostFocus="TextBox_LostFocus"
                      Margin="7,0,17,0"
                      Height="100"
                      MaxHeight="100"
@@ -118,7 +117,6 @@
         </Bold>
             </TextBlock>
             <TextBox Text="{Binding SelectedQuestion.CorrectAnswer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     LostFocus="TextBox_LostFocus"
                      Margin="7,3,17,0" />
             <TextBlock Margin="7,10,17,0">
                 
@@ -127,7 +125,6 @@
         </Bold>
             </TextBlock>
             <TextBox Text="{Binding SelectedQuestion.IncorrectAnswers[0], UpdateSourceTrigger=PropertyChanged}"
-                     LostFocus="TextBox_LostFocus"
                      Margin="7,3,17,0" />
             <TextBlock Margin="7,10,17,0">
         <Bold>
@@ -135,7 +132,6 @@
         </Bold>
             </TextBlock>
             <TextBox Text="{Binding SelectedQuestion.IncorrectAnswers[1], UpdateSourceTrigger=PropertyChanged}"
-                     LostFocus="TextBox_LostFocus"
                      Margin="7,3,17,0" />
             <TextBlock Margin="7,10,17,0">
         <Bold>
@@ -143,11 +139,9 @@
         </Bold>
             </TextBlock>
             <TextBox Text="{Binding SelectedQuestion.IncorrectAnswers[2], UpdateSourceTrigger=PropertyChanged}"
-                     LostFocus="TextBox_LostFocus"
                      Margin="7,3,17,0" />
             <TextBlock Margin="7,10,17,0">
             </TextBlock>
-
         </StackPanel>
     </Grid>
 </UserControl>

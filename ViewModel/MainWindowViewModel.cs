@@ -14,7 +14,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public ConfigurationViewModel ConfigurationViewModel { get; }
         public PlayerViewModel PlayerViewModel { get; }
-        public QuizManagerService LocalDataService { get; }
+        public QuizManagerService ?QuizManagerService { get; }
 
         public DelegateCommand ShowPlayerCommand { get; }
         public DelegateCommand ShowConfigurationCommand { get; }
@@ -51,8 +51,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         }
 
         private QuestionPackViewModel? _activePack;
-
-        private CreateNewPackDialog _newPackDialog;
+        private CreateNewPackDialog ?_newPackDialog;
 
         public QuestionPackViewModel? ActivePack
         {
@@ -69,15 +68,12 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
-
             IsConfigurationViewVisible = true;
+
             Packs = new ObservableCollection<QuestionPackViewModel>();
 
-            ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
+            ConfigurationViewModel = new ConfigurationViewModel(this, QuizManagerService);
             PlayerViewModel = new PlayerViewModel(this);
-
-            //ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
-            //Packs.Add(ActivePack);
 
             ShowPlayerCommand = new DelegateCommand(ShowPlayerView);
             ShowConfigurationCommand = new DelegateCommand(ShowConfigurationView);
@@ -91,22 +87,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ExitCommand = new DelegateCommand(Exit);
         }
 
-        public async Task LoadQuestionPackJson()
-        {
-           
-        }
-
-        public async Task SaveQuestionPackJson()
-        {
-            //var JsonHandler = new Labb_3___GUI_Quiz.QuizManagerService();
-
-            //List<QuestionPack> pakcsToSave = Packs.Select(viewModel => new QuestionPack(
-            //    viewModel.Name,
-            //    viewModel.Difficulty,
-            //    viewModel.TimeLimitInSeconds);
-       
-        }
-     
         private void RemoveQuestionPack(object obj)
         {
             if (ActivePack != null)
@@ -120,12 +100,12 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
                     if (Packs.Count > 0)
                     {
-                        ActivePack = Packs[^1]; // Sätter ActivePack till det sista objektet i listan
+                        ActivePack = Packs[^1]; // Set ActivePack to the last object in the list
                         SelectQuestionPack(ActivePack);
                     }
                     else
                     {
-                        ActivePack = null; // Om listan är tom
+                        ActivePack = null;
                     }
 
                 }
@@ -156,7 +136,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             Packs.Add(NewPack!);
             ActivePack = NewPack;
-            _newPackDialog.Close();
+            _newPackDialog!.Close();
         }
 
         private bool CanAddQuestionPack(object? arg)

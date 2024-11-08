@@ -7,12 +7,9 @@ namespace Labb_3___GUI_Quiz.Command
         private readonly Action<object> execute;
         private readonly Func<object?, bool> canExecute;
 
-        private Action? showPlayerView;
-        private Action? showPackOptionsDialog;
-
         public event EventHandler? CanExecuteChanged;
 
-        public DelegateCommand(Action<Object> execute, Func<object?, bool> canExecute = null)
+        public DelegateCommand(Action<Object> execute, Func<object?, bool> canExecute = null!)
         {
             ArgumentNullException.ThrowIfNull(execute);
             this.execute = execute;

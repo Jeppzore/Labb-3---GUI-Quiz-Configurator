@@ -6,7 +6,6 @@
         public string? CorrectAnswer { get; set; }
         public string[]? IncorrectAnswers { get; set; }
 
-
         public Question()
         {
             IncorrectAnswers = new string[3];
@@ -19,7 +18,5 @@
             CorrectAnswer = correctAnswer;
             IncorrectAnswers = new string[3] { incorrectAnswer1, incorrectAnswer2, incorrectAnswer3 };
         }
-
-
     }
 }

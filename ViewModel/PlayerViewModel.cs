@@ -9,7 +9,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 {
     class PlayerViewModel : ViewModelBase
     {
-        public MainWindowViewModel MainWindowViewModel { get; }
+        public MainWindowViewModel ?MainWindowViewModel { get; }
 
         private readonly MainWindowViewModel? _mainWindowViewModel;
         private readonly Random _random = new Random();
@@ -18,9 +18,9 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         private ObservableCollection<Question> _randomizedQuestions;
 
-        private Question _currentQuestion;
+        private Question ?_currentQuestion;
 
-        private string[] _currentAnswers;
+        private string[] ?_currentAnswers;
 
         private int _currentQuestionCount;
         private int _totalQuestions;
@@ -139,31 +139,31 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         // Keeps track of every buttons respective color
 
-        private Brush _answer1Background;
+        private Brush ?_answer1Background;
         public Brush Answer1Background
         {
-            get => _answer1Background;
+            get => _answer1Background!;
             set { _answer1Background = value; RaisePropertyChanged(nameof(Answer1Background)); }
         }
 
-        private Brush _answer2Background;
+        private Brush ?_answer2Background;
         public Brush Answer2Background
         {
-            get => _answer2Background;
+            get => _answer2Background!;
             set { _answer2Background = value; RaisePropertyChanged(nameof(Answer2Background)); }
         }
 
-        private Brush _answer3Background;
+        private Brush ?_answer3Background;
         public Brush Answer3Background
         {
-            get => _answer3Background;
+            get => _answer3Background!;
             set { _answer3Background = value; RaisePropertyChanged(nameof(Answer3Background)); }
         }
 
-        private Brush _answer4Background;
+        private Brush ?_answer4Background;
         public Brush Answer4Background
         {
-            get => _answer4Background;
+            get => _answer4Background!;
             set { _answer4Background = value; RaisePropertyChanged(nameof(Answer4Background)); }
         }
 
@@ -173,7 +173,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
         public string Answer4 => _currentAnswers?.Length > 3 ? _currentAnswers[3] : string.Empty;
 
         public DelegateCommand SelectedAnswer { get; }
-
 
         public PlayerViewModel(MainWindowViewModel? mainWindowViewModel)
         {
@@ -194,7 +193,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 OnSelectedAnswer(answer);
             }
         }
-        // TODO: Bug - If the incorrect answers have the same string value, the resetcoloring doesn't work as it should
+
         private async void OnSelectedAnswer(string selectedAnswer)
         {
             if (!IsAnsweringEnabled) return;

@@ -1,8 +1,7 @@
-﻿using Labb_3___GUI_Quiz.ViewModel;
-using System.Windows;
+﻿using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
-using Labb_3___GUI_Quiz.Model;
-using System.Collections.ObjectModel;
+using Labb_3___GUI_Quiz.ViewModel;
+using System.Windows;
 
 namespace Labb_3___GUI_Quiz
 {

@@ -3,21 +3,16 @@ using Labb_3___GUI_Quiz.Dialogs;
 using Labb_3___GUI_Quiz.Model;
 using Labb_3___GUI_Quiz.Services;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Labb_3___GUI_Quiz.ViewModel
 {
     internal class ConfigurationViewModel : ViewModelBase
     {
         private readonly MainWindowViewModel? _mainWindowViewModel;
-        private readonly QuizManagerService? _quizManagerService;
 
         public DelegateCommand RemoveQuestion { get; }
         public DelegateCommand AddQuestion { get; }
         public DelegateCommand ShowOptionDialog { get; }
-
-        public DelegateCommand PlayerAnswerCorrect { get; }
-        public DelegateCommand PlayerAnswerWrong { get; }
 
         public QuestionPackViewModel? ActivePack { get => _mainWindowViewModel?.ActivePack; }
 
@@ -45,7 +40,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             this._mainWindowViewModel = mainWindowViewModel;
 
-            AddQuestion = new DelegateCommand(AddQuestionHandler); //(CanAddQuestion)
+            AddQuestion = new DelegateCommand(AddQuestionHandler);
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
             ShowOptionDialog = new DelegateCommand(ShowPackOptionsDialog);
         }

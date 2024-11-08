@@ -16,7 +16,18 @@
         Title="Quiz Configurator" Height="450" Width="800" MinHeight="450" MinWidth="800">
 
     <Window.InputBindings>
+        <!--menu File-->
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding AddQuestionPackCommand}"/>
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{Binding RemoveQuestionPackCommand}"/>
+        <KeyBinding Key="X" Modifiers="Ctrl" Command="{Binding ExitCommand}"/>
+        <!--menu Edit-->
+        <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding ConfigurationViewModel.AddQuestion}"/>
+        <KeyBinding Key="R" Modifiers="Ctrl" Command="{Binding ConfigurationViewModel.RemoveQuestion}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding ConfigurationViewModel.ShowOptionDialog}"/>
+        <!--menu View-->
+        <KeyBinding Key="P" Modifiers="Ctrl" Command="{Binding ShowPlayerCommand}"/>
+        <KeyBinding Key="E" Modifiers="Ctrl" Command="{Binding ShowConfigurationCommand}"/>
+        <KeyBinding Key="F" Modifiers="Ctrl" Command="{Binding ShowFullScreenCommand}"/>
     </Window.InputBindings>
 
     <Window.Resources>

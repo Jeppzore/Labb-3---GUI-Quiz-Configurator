@@ -12,8 +12,5 @@ namespace Labb_3___GUI_Quiz.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-
     }
 }

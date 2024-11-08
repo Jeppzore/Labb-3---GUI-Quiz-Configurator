@@ -1,8 +1,6 @@
 ﻿using Labb_3___GUI_Quiz.Model;
-using Labb_3___GUI_Quiz.ViewModel;
 using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Labb_3___GUI_Quiz.Services
 {
@@ -13,7 +11,7 @@ namespace Labb_3___GUI_Quiz.Services
 
         static QuizManagerService()
         {
-            // Skapa sökvägen till Local AppData
+            // Create a path to the folder
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _dataDirectory = Path.Combine(appDataPath, "JespersLabb3");
 
@@ -23,14 +21,14 @@ namespace Labb_3___GUI_Quiz.Services
                 PropertyNameCaseInsensitive = true
             };
 
-            // Skapa mappen om den inte finns
+            // Create a map if it doesn't exists
             if (!Directory.Exists(_dataDirectory))
             {
                 Directory.CreateDirectory(_dataDirectory);
             }
         }
 
-        // Spara QuestionPacks till JSON-fil
+        // Save QuestionPacks to JSON-file
         public static async void SaveQuestionPacks(List<QuestionPack> questionPacks)
         {
             string filePath = Path.Combine(_dataDirectory, "QuestionPacks.json");
@@ -42,7 +40,7 @@ namespace Labb_3___GUI_Quiz.Services
             await File.WriteAllTextAsync(filePath, json);
         }
 
-        //Ladda QuestionPacks från JSON-fil
+        //Load QuestionPacks from JSON-file
         public static async Task<List<QuestionPack>> LoadQuestionPacks(string fileName)
         {
             string filePath = Path.Combine(_dataDirectory, fileName);
