@@ -8,98 +8,46 @@ namespace Labb_3___GUI_Quiz.Services
 {
     internal class QuizManagerService
     {
-        private readonly string filePath;
-        private MainWindowViewModel? _mainWindowViewModel;
-        private JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            IncludeFields = true
-        };
+        private readonly string _dataDirectory;
 
-        public QuizManagerService(MainWindowViewModel mainWindowViewModel)
+        public QuizManagerService()
         {
-            _mainWindowViewModel = mainWindowViewModel;
-            var appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "QuizApp");
-            Directory.CreateDirectory(appDataFolder);
-            filePath = Path.Combine(appDataFolder, "Questionpacks.json");
+            // Skapa sökvägen till Local AppData
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            _dataDirectory = Path.Combine(appDataPath, "QuizApp");
+
+            // Skapa mappen om den inte finns
+            if (!Directory.Exists(_dataDirectory))
+            {
+                Directory.CreateDirectory(_dataDirectory);
+            }
         }
 
-        public void SaveQuestions(List<Question> questions, string packName)
+        // Spara ett QuestionPack till JSON-fil
+        public void SaveQuestionPack(QuestionPack questionPack)
         {
-            var existingPacks = LoadQuestionPacks();
+            string filePath = Path.Combine(_dataDirectory, $"{questionPack.Name}.json");
 
-            var packToUpdate = existingPacks.FirstOrDefault(p => p.Name == packName);
-            if (packToUpdate != null)
-            {
-                packToUpdate.Questions = questions;
-            }
-            else
-            {
-                var newPack = new QuestionPack(packName) { Questions = questions };
-                existingPacks.Add(newPack);
-            }
+            var options = new JsonSerializerOptions { WriteIndented = true };
 
-            var json = JsonSerializer.Serialize(new { QuestionPacks = existingPacks }, options);
+            string json = JsonSerializer.Serialize(questionPack, options);
+
             File.WriteAllText(filePath, json);
         }
 
-        public void SaveQuestionPacks(List<QuestionPack> newPacks)
+        // Ladda ett QuestionPack från JSON-fil
+        public QuestionPack LoadQuestionPack(string fileName)
         {
-            var existingPacks = LoadQuestionPacks();
+            string filePath = Path.Combine(_dataDirectory, fileName);
 
-            foreach (var newPack in newPacks)
+            if (!File.Exists(filePath))
             {
-                var existingPack = existingPacks.FirstOrDefault(p => p.Name == newPack.Name);
-                if (existingPack != null)
-                {
-                    existingPacks.Remove(existingPack);
-                }
-                existingPacks.Add(newPack);
-            }
-            if (existingPacks.Count == 0)
-            {
-                var defaultPack = new QuestionPack("Default Pack", Difficulty.Easy, 30);
-                existingPacks.Add(defaultPack);
-            }
-            var json = JsonSerializer.Serialize(new { QuestionPacks = existingPacks }, options);
-            File.WriteAllText(filePath, json);
-        }
-
-        public List<QuestionPack> LoadQuestionPacks()
-        {
-            try
-            {
-                var json = File.ReadAllText(filePath);
-                var result = JsonSerializer.Deserialize<RootObject>(json, options);
-                if (result == null || result.QuestionPacks == null)
-                {
-                    return new List<QuestionPack>();
-                }
-                return result.QuestionPacks;
+                throw new FileNotFoundException("The specified question pack file was not found.", filePath);
             }
 
-            catch (FileNotFoundException)
-            {
-                return new List<QuestionPack> { new QuestionPack("Default Pack", Difficulty.Easy, 30) };
-            }
-        }
-        public void RemoveQuestionPack(List<QuestionPack> packs, QuestionPack packToRemove)
-        {
+            string json = File.ReadAllText(filePath);
 
-            if (packToRemove != null && packToRemove.Name != "Default Pack")
-            {
-                packs.Remove(packToRemove);
-                var json = JsonSerializer.Serialize(new { QuestionPacks = packs }, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
-            }
-            else
-            {
-                Console.WriteLine("Default Pack cannot be removed.");
-            }
-        }
-        public class RootObject
-        {
-            public List<QuestionPack> QuestionPacks { get; set; } = new List<QuestionPack>();
+            return JsonSerializer.Deserialize<QuestionPack>(json) ?? throw new InvalidOperationException("Failed to deserialize QuestionPack.");
         }
     }
 }

@@ -67,6 +67,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public MainWindowViewModel()
         {
+
             IsConfigurationViewVisible = true;
             Packs = new ObservableCollection<QuestionPackViewModel>();
 
@@ -86,6 +87,22 @@ namespace Labb_3___GUI_Quiz.ViewModel
             RemoveQuestionPackCommand = new DelegateCommand(RemoveQuestionPack);
 
             ExitCommand = new DelegateCommand(Exit);
+        }
+
+        public async Task LoadQuestionPackJson()
+        {
+           
+        }
+
+        public async Task SaveQuestionPackJson()
+        {
+            //var JsonHandler = new Labb_3___GUI_Quiz.QuizManagerService();
+
+            //List<QuestionPack> pakcsToSave = Packs.Select(viewModel => new QuestionPack(
+            //    viewModel.Name,
+            //    viewModel.Difficulty,
+            //    viewModel.TimeLimitInSeconds);
+       
         }
      
         private void RemoveQuestionPack(object obj)

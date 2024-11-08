@@ -194,7 +194,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 OnSelectedAnswer(answer);
             }
         }
-
+        // TODO: Bug - If the incorrect answers have the same string value, the resetcoloring doesn't work as it should
         private async void OnSelectedAnswer(string selectedAnswer)
         {
             if (!IsAnsweringEnabled) return;
