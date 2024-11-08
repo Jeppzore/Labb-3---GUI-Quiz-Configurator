@@ -28,6 +28,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
         private bool _isPlayerViewVisible;
         private bool _isConfigurationViewVisible;
 
+        public const string QuestionPackFileName = "QuestionPacks.json";
+
         public bool IsPlayerViewVisible
         {
             get { return _isPlayerViewVisible; }
@@ -74,8 +76,8 @@ namespace Labb_3___GUI_Quiz.ViewModel
             ConfigurationViewModel = new ConfigurationViewModel(this, LocalDataService);
             PlayerViewModel = new PlayerViewModel(this);
 
-            ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
-            Packs.Add(ActivePack);
+            //ActivePack = new QuestionPackViewModel(new QuestionPack("My Question Pack"));
+            //Packs.Add(ActivePack);
 
             ShowPlayerCommand = new DelegateCommand(ShowPlayerView);
             ShowConfigurationCommand = new DelegateCommand(ShowConfigurationView);

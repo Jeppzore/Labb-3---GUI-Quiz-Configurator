@@ -41,38 +41,9 @@ namespace Labb_3___GUI_Quiz.ViewModel
 
         public ObservableCollection<string> ShuffledAnswers { get; set; } = new ObservableCollection<string>();
 
-
-        // TODO: Fixa så att Add´Question inte går att klicka på när QUestionPack inte finns.
-        //private QuestionPack? _selectedQuestionPack;
-
-        //public QuestionPack? SelectedQuestionPack
-        //{
-        //    get => _selectedQuestionPack;
-        //    set
-        //    {
-        //        if (_selectedQuestionPack != value)
-        //        {
-        //            _selectedQuestionPack = value;
-        //            RaisePropertyChanged();
-        //            AddQuestion.RaiseCanExecuteChanged();
-        //        }
-        //    }
-        //}
-
         public ConfigurationViewModel(MainWindowViewModel? mainWindowViewModel, QuizManagerService? quizManagerService)
         {
             this._mainWindowViewModel = mainWindowViewModel;
-            //_quizManagerService = quizManagerService ?? new QuizManagerService();
-
-            //var loadedQuestions = _quizManagerService?.LoadQuestions();
-
-            //if (loadedQuestions != null)
-            //{
-            //    foreach (var question in loadedQuestions)
-            //    {
-            //        ActivePack?.Questions.Add(question);
-            //    }
-            //}
 
             AddQuestion = new DelegateCommand(AddQuestionHandler); //(CanAddQuestion)
             RemoveQuestion = new DelegateCommand(RemoveQuestionHandler, CanRemoveQuestion);
@@ -90,7 +61,6 @@ namespace Labb_3___GUI_Quiz.ViewModel
             {
                 ActivePack?.Questions.Remove(SelectedQuestion);
                 SelectedQuestion = null;
-                //_quizManagerService?.SaveQuestions(ActivePack?.Questions);
             }
         }
         private bool CanRemoveQuestion(object? obj) => SelectedQuestion != null;
@@ -102,16 +72,7 @@ namespace Labb_3___GUI_Quiz.ViewModel
                 var newQuestion = new Question("<New Question>", "", "", "", "");
                 ActivePack?.Questions.Add(newQuestion);
                 SelectedQuestion = newQuestion;
-                //_quizManagerService?.SaveQuestions(ActivePack?.Questions!);
             }
         }
-        public void SaveQuestions()
-        {
-            if (ActivePack?.Questions != null)
-            {
-                //_quizManagerService?.SaveQuestions(ActivePack.Questions);
-            }
-        }
-
     }
 }
