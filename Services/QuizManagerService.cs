@@ -9,12 +9,19 @@ namespace Labb_3___GUI_Quiz.Services
     internal class QuizManagerService
     {
         private readonly string _dataDirectory;
+        private readonly JsonSerializerOptions _options;
 
         public QuizManagerService()
         {
             // Skapa sökvägen till Local AppData
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _dataDirectory = Path.Combine(appDataPath, "QuizApp");
+
+            _options = new JsonSerializerOptions
+            {
+                IncludeFields = true,
+                PropertyNameCaseInsensitive = true
+            };
 
             // Skapa mappen om den inte finns
             if (!Directory.Exists(_dataDirectory))
@@ -24,7 +31,7 @@ namespace Labb_3___GUI_Quiz.Services
         }
 
         // Spara ett QuestionPack till JSON-fil
-        public void SaveQuestionPack(QuestionPack questionPack)
+        public async void SaveQuestionPack(QuestionPack questionPack)
         {
             string filePath = Path.Combine(_dataDirectory, $"{questionPack.Name}.json");
 
@@ -32,22 +39,22 @@ namespace Labb_3___GUI_Quiz.Services
 
             string json = JsonSerializer.Serialize(questionPack, options);
 
-            File.WriteAllText(filePath, json);
+            await File.WriteAllTextAsync(filePath, json);
         }
 
         // Ladda ett QuestionPack från JSON-fil
-        public QuestionPack LoadQuestionPack(string fileName)
-        {
-            string filePath = Path.Combine(_dataDirectory, fileName);
+        //public async QuestionPack LoadQuestionPack(string fileName)
+        //{
+        //    string filePath = Path.Combine(_dataDirectory, fileName);
 
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException("The specified question pack file was not found.", filePath);
-            }
+        //    if (!File.Exists(filePath))
+        //    {
+        //        throw new FileNotFoundException("The specified question pack file was not found.", filePath);
+        //    }
 
-            string json = File.ReadAllText(filePath);
+        //    string json = await File.ReadAllTextAsync(filePath);
 
-            return JsonSerializer.Deserialize<QuestionPack>(json) ?? throw new InvalidOperationException("Failed to deserialize QuestionPack.");
-        }
+        //    return JsonSerializer.Deserialize<QuestionPack>(json) ?? throw new InvalidOperationException("Failed to deserialize QuestionPack.");
+        //}
     }
 }
